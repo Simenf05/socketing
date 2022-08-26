@@ -3,6 +3,7 @@ import threading
 import logging
 import time
 import json
+import pickle
 
 
 
@@ -48,11 +49,7 @@ def recvdata(sock, key):
 
     while running:
         try:
-            print(sock[0])
-
-            getdata.update({key: sock[0].recv(1024).decode("ascii")})
-
-            print(getdata[key])
+            getdata.update({key: pickle.loads(sock[0].recv(1024))})
 
         except ConnectionAbortedError and ConnectionResetError:
             sockets.pop(key)
@@ -67,8 +64,8 @@ def senddata(socketAndData):
     # logging.info("send starter")
     # print(sockets)
     for key, sock in sockets.items():
-        print(socketAndData)
-        sock[0].send(str(socketAndData).encode("ascii"))
+        print(socketAndData, getdata)
+        sock[0].send(pickle.dumps(socketAndData[1]))
         
     # logging.info("send slutter")
 
@@ -82,11 +79,11 @@ def game():
 
         for key, sock in sockets.items():
             try:
-                senddata((data, data))
+                senddata((sock, data))
             except ConnectionAbortedError and ConnectionResetError:
                 sockets.pop(key)
 
-        time.sleep(.5)
+        time.sleep(.05)
         
 
 def conn():
@@ -98,6 +95,8 @@ def conn():
     while running:
         
         sockets.update({"sock " + str(nr): s.accept()})
+        sockets["sock " + str(nr)][0].send(("sock " + str(nr)).encode("ascii"))
+
         threadDict.update({"thread " + str(nr + 2): threading.Thread(target=recvdata, args=(sockets["sock " + str(nr)], "sock " + str(nr)))})
 
         print(threadDict)

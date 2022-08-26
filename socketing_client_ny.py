@@ -4,6 +4,7 @@ import threading
 import pygame
 import time
 import json
+import pickle
 
 HOST = socket.gethostname()
 PORT = 443
@@ -57,32 +58,27 @@ class Game:
     def recving(self):
 
         while not self.crashed:
-            self.data = s.recv(1024).decode("ascii")
-            print(self.data)
-            time.sleep(10)
+            self.data = pickle.loads(s.recv(1024))
+            # time.sleep(10)
 
 
     def sending(self):
 
         while not self.crashed:
             s.send(
-                    json.dumps({
+                    pickle.dumps({
                         "box": self.box,
                         "color": "blue"
-                        }).encode("ascii")
+                        })
                 )
-            time.sleep(1)
+            # time.sleep(1)
 
 
     def screenDraw(self, drawing: dict):
-
-
-        pass
+        pygame.draw.rect(self.screen, drawing["color"], drawing["box"])
 
 
     def running(self):
-
-
 
         controlThread = threading.Thread(target=self.controls)
         recvThread = threading.Thread(target=self.recving)
@@ -90,6 +86,7 @@ class Game:
 
         controlThread.start()
         recvThread.start()
+        sendThread.start()
 
         while not self.crashed:
             self.events = pygame.event.get()
@@ -108,6 +105,14 @@ class Game:
             
 
             pygame.Surface.fill(self.screen, "black")
+
+            if self.data:
+                for key, d in self.data.items():
+                    if key == self.sock:
+                        continue
+                    else:
+                        self.screenDraw(d)
+
             pygame.draw.rect(self.screen, "blue", self.box)
 
             pygame.display.update()
@@ -139,6 +144,8 @@ class Game:
             self.clock = pygame.time.Clock()
             
             s.connect((HOST, PORT))
+
+            self.sock = s.recv(1024).decode("ascii")
             self.running()
             
             
