@@ -2,15 +2,36 @@ import socket
 import threading
 import logging
 import time
+import json
+
+
+
+
+def writeNew(file, info):
+    file.write(json.dumps(info))
+    file.close()
+
+def readNew(file):
+    info = json.loads(file.read())
+    file.close()
+    return info
+
+
+writeNew(open("info.json", "w"), {"heu": "hey"})
+
+print(readNew(open("info.json")))
+
 
 
 format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=format, level=logging.INFO, datefmt="%H:%M:%S")
 
 
-sockets = []
-threadList = []
-getdata = [0]
+# sockets = []
+
+sockets = {}
+threadDict = {}
+getdata = {}
 
 running = True
 
@@ -32,7 +53,10 @@ def recvdata(s, addr):
     while running:
         try:
             print(getdata)
-            getdata[indexofshit] = s.recv(1024)
+
+            getdata.update({})
+
+            # getdata[indexofshit] = s.recv(1024)
             print(getdata[0].decode("ascii"))
         except ConnectionAbortedError and ConnectionResetError:
             sockets.pop(indexofshit)
@@ -71,21 +95,24 @@ def conn():
     logging.info("kobling starter")
     s.bind((HOST, PORT))
     s.listen(5)
+    nr = 1
 
     while running:
-        sockets.append(s.accept())
+        
+        sockets.update({"sock " + str(nr): s.accept()})
+        threadDict.update({"thread " + str(nr + 2): threading.Thread(target=recvdata, args=(sockets["sock " + str(nr)]))})
 
-        threadList.append(threading.Thread(target=recvdata, args=(sockets[-1])))
-
-        print(threadList)
+        print(threadDict)
         print(sockets)
 
-        threadList[-1].start()
+
+        threadDict["thread " + str(nr + 2)].start()
+        nr += 1
 
     logging.info("kobling slutter")
 
 
-threadList.append(threading.Thread(target=conn))
-threadList.append(threading.Thread(target=game))
-threadList[0].start()
-threadList[1].start()
+threadDict.update({"thread conn": threading.Thread(target=conn)})
+threadDict.update({"thread game": threading.Thread(target=game)})
+threadDict["thread conn"].start()
+threadDict["thread game"].start()
