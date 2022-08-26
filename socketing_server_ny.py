@@ -48,7 +48,7 @@ def recvdata(sock, key):
 
     while running:
         try:
-            print(getdata)
+            print(sock[0])
 
             getdata.update({key: sock[0].recv(1024).decode("ascii")})
 
@@ -67,6 +67,7 @@ def senddata(socketAndData):
     # logging.info("send starter")
     # print(sockets)
     for key, sock in sockets.items():
+        print(socketAndData)
         sock[0].send(str(socketAndData).encode("ascii"))
         
     # logging.info("send slutter")
@@ -81,7 +82,7 @@ def game():
 
         for key, sock in sockets.items():
             try:
-                senddata((sock, data))
+                senddata((data, data))
             except ConnectionAbortedError and ConnectionResetError:
                 sockets.pop(key)
 
