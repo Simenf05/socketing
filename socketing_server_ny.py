@@ -2,33 +2,13 @@ import socket
 import threading
 import logging
 import time
-import json
 import pickle
 
-
-
-"""
-def writeNew(file, info):
-    file.write(json.dumps(info))
-    file.close()
-
-def readNew(file):
-    info = json.loads(file.read())
-    file.close()
-    return info
-
-
-writeNew(open("info.json", "w"), {"heu": "hey"})
-
-print(readNew(open("info.json")))
-"""
 
 
 format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=format, level=logging.INFO, datefmt="%H:%M:%S")
 
-
-# sockets = []
 
 sockets = {}
 threadDict = {}
@@ -45,7 +25,6 @@ s = socket.socket()
 def recvdata(sock, key):
     global getdata
     logging.info("motta starter")
-    print(sock, key)
 
     while running:
         try:
@@ -57,23 +36,16 @@ def recvdata(sock, key):
     logging.info("motta slutter")
     
     getdata.pop(key)
-    threadDict.pop("thread " + str(int(key[-1]) + 2)) ##################################################
+    threadDict.pop("thread " + str(int(key[-1]) + 2))
     
 
 def senddata(socketAndData):
-    # logging.info("send starter")
-    # print(sockets)
     for key, sock in sockets.items():
-        print(socketAndData, getdata)
         sock[0].send(pickle.dumps(socketAndData[1]))
-        
-    # logging.info("send slutter")
 
 
 def game():
     while running:
-        # print(time.time())
-        # print(sockets)
 
         data = getdata
 

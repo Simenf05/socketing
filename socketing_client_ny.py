@@ -2,8 +2,6 @@ import socket
 import random
 import threading
 import pygame
-import time
-import json
 import pickle
 
 HOST = socket.gethostname()
@@ -59,7 +57,6 @@ class Game:
 
         while not self.crashed:
             self.data = pickle.loads(s.recv(1024))
-            # time.sleep(10)
 
 
     def sending(self):
@@ -71,7 +68,6 @@ class Game:
                         "color": "blue"
                         })
                 )
-            # time.sleep(1)
 
 
     def screenDraw(self, drawing: dict):
@@ -148,19 +144,5 @@ class Game:
             self.sock = s.recv(1024).decode("ascii")
             self.running()
             
-            
-
 
 game = Game()
-
-
-"""
-with socket.socket() as s:
-    s.connect((HOST, PORT))
-
-    for i in range(4):
-        s.send("100, 100".encode("ascii"))
-        time.sleep(1)
-    # data = s.recv(1024)
-    # print(data.decode("ascii"))
-"""
