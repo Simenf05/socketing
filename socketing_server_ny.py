@@ -14,7 +14,7 @@ getdata = [0]
 
 running = True
 
-HOST = "192.168.0.191"
+HOST = socket.gethostname()
 PORT = 443
 
 s = socket.socket()

@@ -3,7 +3,7 @@ import threading
 import pygame
 import time
 
-HOST = "192.168.0.191"
+HOST = socket.gethostname()
 PORT = 443
 
 with socket.socket() as s:
