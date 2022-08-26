@@ -50,13 +50,13 @@ class Game:
                     self.keyup(e)
                     
                     
-
-        
-
     def recving(self):
 
         while not self.crashed:
-            self.data = pickle.loads(s.recv(1024))
+            try:
+                self.data = pickle.loads(s.recv(1024))
+            except pickle.UnpicklingError:
+                continue
 
 
     def sending(self):
