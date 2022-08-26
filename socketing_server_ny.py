@@ -6,7 +6,7 @@ import json
 
 
 
-
+"""
 def writeNew(file, info):
     file.write(json.dumps(info))
     file.close()
@@ -20,7 +20,7 @@ def readNew(file):
 writeNew(open("info.json", "w"), {"heu": "hey"})
 
 print(readNew(open("info.json")))
-
+"""
 
 
 format = "%(asctime)s: %(message)s"
@@ -50,7 +50,7 @@ def recvdata(sock, key):
         try:
             print(getdata)
 
-            getdata.update({key: sock.recv(1024).decode("ascii")})
+            getdata.update({key: sock[0].recv(1024).decode("ascii")})
 
             print(getdata[key])
 
@@ -59,13 +59,14 @@ def recvdata(sock, key):
             break
     logging.info("motta slutter")
     
-    threadDict.pop("thread " + key[-1]) ##################################################
+    getdata.pop(key)
+    threadDict.pop("thread " + str(int(key[-1]) + 2)) ##################################################
     
 
 def senddata(socketAndData):
     logging.info("send starter")
     # print(sockets)
-    for sock in sockets:
+    for key, sock in sockets.items():
         sock[0].send(str(socketAndData).encode("ascii"))
         
     logging.info("send slutter")
