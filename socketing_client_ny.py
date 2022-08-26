@@ -15,4 +15,3 @@ with socket.socket() as s:
     # data = s.recv(1024)
     # print(data.decode("ascii"))
 
-"""heihei"""
