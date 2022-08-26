@@ -41,29 +41,25 @@ PORT = 443
 s = socket.socket()
 
 
-def recvdata(s, addr):
+def recvdata(sock, key):
+    global getdata
     logging.info("motta starter")
-    print(sockets, s)
-    indexofshit = 0
-    for succ in sockets:
-        if succ[0] == s:
-            break
-        indexofshit += 1
+    print(sock, key)
 
     while running:
         try:
             print(getdata)
 
-            getdata.update({})
+            getdata.update({key: sock.recv(1024).decode("ascii")})
 
-            # getdata[indexofshit] = s.recv(1024)
-            print(getdata[0].decode("ascii"))
+            print(getdata[key])
+
         except ConnectionAbortedError and ConnectionResetError:
-            sockets.pop(indexofshit)
+            sockets.pop(key)
             break
     logging.info("motta slutter")
     
-    threadList.pop(indexofshit + 2)
+    threadDict.pop("thread " + key[-1]) ##################################################
     
 
 def senddata(socketAndData):
@@ -82,11 +78,11 @@ def game():
 
         data = "hei"
 
-        for sock in sockets:
+        for key, sock in sockets.items():
             try:
                 senddata((sock, data))
             except ConnectionAbortedError and ConnectionResetError:
-                sockets.remove(sock)
+                sockets.pop(key)
 
         time.sleep(.5)
         
@@ -100,11 +96,10 @@ def conn():
     while running:
         
         sockets.update({"sock " + str(nr): s.accept()})
-        threadDict.update({"thread " + str(nr + 2): threading.Thread(target=recvdata, args=(sockets["sock " + str(nr)]))})
+        threadDict.update({"thread " + str(nr + 2): threading.Thread(target=recvdata, args=(sockets["sock " + str(nr)], "sock " + str(nr)))})
 
         print(threadDict)
         print(sockets)
-
 
         threadDict["thread " + str(nr + 2)].start()
         nr += 1
