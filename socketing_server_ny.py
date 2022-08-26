@@ -77,7 +77,7 @@ def game():
         # print(time.time())
         # print(sockets)
 
-        data = "hei"
+        data = getdata
 
         for key, sock in sockets.items():
             try:
