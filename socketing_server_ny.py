@@ -64,12 +64,12 @@ def recvdata(sock, key):
     
 
 def senddata(socketAndData):
-    logging.info("send starter")
+    # logging.info("send starter")
     # print(sockets)
     for key, sock in sockets.items():
         sock[0].send(str(socketAndData).encode("ascii"))
         
-    logging.info("send slutter")
+    # logging.info("send slutter")
 
 
 def game():
