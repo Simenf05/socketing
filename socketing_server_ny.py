@@ -58,7 +58,7 @@ def game():
             except (ConnectionAbortedError, ConnectionResetError):
                 sockets.pop(key)
 
-        time.sleep(.05)
+        time.sleep(.0005)
         
 
 def conn():
