@@ -30,18 +30,21 @@ def recvdata(sock, key):
         try:
             getdata.update({key: pickle.loads(sock[0].recv(1024))})
 
-        except ConnectionAbortedError and ConnectionResetError:
+        except (ConnectionAbortedError, ConnectionResetError, pickle.UnpicklingError, EOFError):
             sockets.pop(key)
             break
     logging.info("motta slutter")
     
     getdata.pop(key)
-    threadDict.pop("thread " + str(int(key[-1]) + 2))
+    threadDict.pop("thread " + str(int(key.split()[1]) + 2))
     
 
 def senddata(socketAndData):
     for key, sock in sockets.items():
-        sock[0].send(pickle.dumps(socketAndData[1]))
+        try:
+            sock[0].send(pickle.dumps(socketAndData[1]))
+        except (ConnectionAbortedError, ConnectionResetError):
+            sockets.pop(key)
 
 
 def game():
@@ -52,7 +55,7 @@ def game():
         for key, sock in sockets.items():
             try:
                 senddata((sock, data))
-            except ConnectionAbortedError and ConnectionResetError:
+            except (ConnectionAbortedError, ConnectionResetError):
                 sockets.pop(key)
 
         time.sleep(.05)
