@@ -4,10 +4,13 @@ import threading
 import pygame
 import pickle
 
+#                         prøve å sende med bytes() i stedet                          #
+
 HOST = socket.gethostname()
 PORT = 443
 
 s = socket.socket()
+s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 
 randomnr = random.randint(0, 500)
 
@@ -54,21 +57,49 @@ class Game:
 
         while not self.crashed:
             try:
-                self.data = pickle.loads(s.recv(1024))
+                self.data = pickle.loads(s.recv(2048))
             except pickle.UnpicklingError:
                 continue
+    
+    
+    def sendEnd(self):
+        s.send(
+            pickle.dumps({
+                        "info": "quit",
+                        "sock": self.sock,
+                        "box": None,
+                        "color": None
+                        })
+        )
+    
+    
+    def sendStart(self):
+        s.send(
+            pickle.dumps({
+                        "info": "start",
+                        "sock": self.sock,
+                        "box": (self.box.x, self.box.y, self.box.w, self.box.h),
+                        "color": "blue"
+                        })
+        )
 
 
     def sending(self):
 
+        self.sendStart()
+        
         while not self.crashed:
             s.send(
                     pickle.dumps({
-                        "box": self.box,
+                        "info": "none",
+                        "sock": self.sock,
+                        "box": (self.box.x, self.box.y, self.box.w, self.box.h),
                         "color": "blue"
                         })
                 )
-
+        
+        self.sendEnd()
+        
 
     def screenDraw(self, drawing: dict):
         pygame.draw.rect(self.screen, drawing["color"], drawing["box"])
@@ -130,6 +161,7 @@ class Game:
                 "y": randomnr
             }
 
+            
             self.box = pygame.Rect(self.pos["x"], self.pos["y"], 20, 20)
 
             self.data = {}
@@ -142,6 +174,7 @@ class Game:
             s.connect((HOST, PORT))
 
             self.sock = s.recv(1024).decode("ascii")
+            
             self.running()
             
 

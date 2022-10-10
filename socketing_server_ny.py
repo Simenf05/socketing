@@ -20,6 +20,7 @@ HOST = socket.gethostname()
 PORT = 443
 
 s = socket.socket()
+s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 
 
 def recvdata(sock, key):
@@ -27,12 +28,15 @@ def recvdata(sock, key):
     logging.info("motta starter")
 
     while running:
-        try:
-            getdata.update({key: pickle.loads(sock[0].recv(1024))})
+        
+        recving = sock[0].recv(2048)
+        
+        getdata.update({key: pickle.loads(recving)})
 
-        except (ConnectionAbortedError, ConnectionResetError, pickle.UnpicklingError, EOFError):
+        if getdata[key]["info"] == "quit":
             sockets.pop(key)
             break
+        
     logging.info("motta slutter")
     
     getdata.pop(key)
@@ -40,7 +44,7 @@ def recvdata(sock, key):
     
 
 def senddata(socketAndData):
-    for key, sock in sockets.items():
+    for key, sock in sockets.copy().items():
         try:
             sock[0].send(pickle.dumps(socketAndData[1]))
         except (ConnectionAbortedError, ConnectionResetError):
@@ -52,7 +56,7 @@ def game():
 
         data = getdata
 
-        for key, sock in sockets.items():
+        for key, sock in sockets.copy().items():
             try:
                 senddata((sock, data))
             except (ConnectionAbortedError, ConnectionResetError):
