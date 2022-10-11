@@ -2,8 +2,7 @@ import socket
 import threading
 import logging
 import time
-import pickle
-
+import json
 
 
 format = "%(asctime)s: %(message)s"
@@ -31,7 +30,10 @@ def recvdata(sock, key):
         
         recving = sock[0].recv(2048)
         
-        getdata.update({key: pickle.loads(recving)})
+        print(recving)
+        
+        recving = json.loads(recving.decode("utf-8"))        
+        getdata.update({key: recving})
 
         if getdata[key]["info"] == "quit":
             sockets.pop(key)
@@ -46,9 +48,11 @@ def recvdata(sock, key):
 def senddata(socketAndData):
     for key, sock in sockets.copy().items():
         try:
-            sock[0].send(pickle.dumps(socketAndData[1]))
+            sock[0].send(json.dumps(socketAndData[1]).encode("utf-8"))
         except (ConnectionAbortedError, ConnectionResetError):
             sockets.pop(key)
+    
+    time.sleep(.05)
 
 
 def game():

@@ -2,7 +2,8 @@ import socket
 import random
 import threading
 import pygame
-import pickle
+import json
+import time
 
 #                         prøve å sende med bytes() i stedet                          #
 
@@ -56,31 +57,40 @@ class Game:
     def recving(self):
 
         while not self.crashed:
+            
+            self.data = s.recv(2048)
+            # print(self.data)
+            
+            self.strdata = self.data.decode("utf-8")
+            
+            print(self.strdata)
+            
             try:
-                self.data = pickle.loads(s.recv(2048))
-            except pickle.UnpicklingError:
+                self.usedData = json.loads(self.data.decode("utf-8"))
+            except json.JSONDecodeError:
                 continue
+
     
     
     def sendEnd(self):
         s.send(
-            pickle.dumps({
+            json.dumps({
                         "info": "quit",
                         "sock": self.sock,
                         "box": None,
                         "color": None
-                        })
+                        }).encode("utf-8")
         )
     
     
     def sendStart(self):
         s.send(
-            pickle.dumps({
+            json.dumps({
                         "info": "start",
                         "sock": self.sock,
                         "box": (self.box.x, self.box.y, self.box.w, self.box.h),
                         "color": "blue"
-                        })
+                        }).encode("utf-8")
         )
 
 
@@ -90,13 +100,14 @@ class Game:
         
         while not self.crashed:
             s.send(
-                    pickle.dumps({
+                    json.dumps({
                         "info": "none",
                         "sock": self.sock,
                         "box": (self.box.x, self.box.y, self.box.w, self.box.h),
                         "color": "blue"
-                        })
+                        }).encode("utf-8")
                 )
+            time.sleep(.005)
         
         self.sendEnd()
         
@@ -117,6 +128,7 @@ class Game:
 
         while not self.crashed:
             self.events = pygame.event.get()
+            # print(self.events)
             for e in self.events:
                 if e.type == pygame.QUIT:
                     self.crashed = True
@@ -133,8 +145,8 @@ class Game:
 
             pygame.Surface.fill(self.screen, "black")
 
-            if self.data:
-                for key, d in self.data.items():
+            if self.usedData:
+                for key, d in self.usedData.items():
                     if key == self.sock:
                         continue
                     else:
@@ -165,6 +177,9 @@ class Game:
             self.box = pygame.Rect(self.pos["x"], self.pos["y"], 20, 20)
 
             self.data = {}
+            self.strdata = {}
+            self.usedData = {}
+            
             self.crashed = False
 
             self.events = pygame.event.get()
