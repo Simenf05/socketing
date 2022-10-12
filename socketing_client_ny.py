@@ -7,7 +7,7 @@ import time
 
 #                         prøve å sende med bytes() i stedet                          #
 
-HOST = "10.2.2.103"
+HOST = socket.gethostname()
 PORT = 80
 
 s = socket.socket()
