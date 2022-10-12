@@ -7,8 +7,8 @@ import time
 
 #                         prøve å sende med bytes() i stedet                          #
 
-HOST = socket.gethostname()
-PORT = 443
+HOST = "10.2.2.103"
+PORT = 80
 
 s = socket.socket()
 s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
