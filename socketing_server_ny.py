@@ -30,8 +30,6 @@ def recvdata(sock, key):
         
         recving = sock[0].recv(2048)
         
-        print(recving)
-        
         recving = json.loads(recving.decode("utf-8"))        
         getdata.update({key: recving})
 
@@ -52,7 +50,7 @@ def senddata(socketAndData):
         except (ConnectionAbortedError, ConnectionResetError):
             sockets.pop(key)
     
-    time.sleep(.05)
+    time.sleep(.0001)
 
 
 def game():
@@ -87,6 +85,7 @@ def conn():
 
         threadDict["thread " + str(nr + 2)].start()
         nr += 1
+        print("sug pikk")
 
     logging.info("kobling slutter")
 

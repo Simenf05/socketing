@@ -5,7 +5,8 @@ import pygame
 import json
 import time
 
-#                         prøve å sende med bytes() i stedet                          #
+
+color = input("color: ")
 
 HOST = socket.gethostname()
 PORT = 443
@@ -58,12 +59,7 @@ class Game:
 
         while not self.crashed:
             
-            self.data = s.recv(2048)
-            # print(self.data)
-            
-            self.strdata = self.data.decode("utf-8")
-            
-            print(self.strdata)
+            self.data = s.recv(2048)            
             
             try:
                 self.usedData = json.loads(self.data.decode("utf-8"))
@@ -81,6 +77,7 @@ class Game:
                         "color": None
                         }).encode("utf-8")
         )
+        time.sleep(.005)
     
     
     def sendStart(self):
@@ -89,9 +86,10 @@ class Game:
                         "info": "start",
                         "sock": self.sock,
                         "box": (self.box.x, self.box.y, self.box.w, self.box.h),
-                        "color": "blue"
+                        "color": color
                         }).encode("utf-8")
         )
+        time.sleep(.005)
 
 
     def sending(self):
@@ -104,7 +102,7 @@ class Game:
                         "info": "none",
                         "sock": self.sock,
                         "box": (self.box.x, self.box.y, self.box.w, self.box.h),
-                        "color": "blue"
+                        "color": color
                         }).encode("utf-8")
                 )
             time.sleep(.005)
@@ -152,7 +150,7 @@ class Game:
                     else:
                         self.screenDraw(d)
 
-            pygame.draw.rect(self.screen, "blue", self.box)
+            pygame.draw.rect(self.screen, color, self.box)
 
             pygame.display.update()
             self.clock.tick(30)
@@ -177,7 +175,7 @@ class Game:
             self.box = pygame.Rect(self.pos["x"], self.pos["y"], 20, 20)
 
             self.data = {}
-            self.strdata = {}
+            
             self.usedData = {}
             
             self.crashed = False
@@ -190,7 +188,8 @@ class Game:
 
             self.sock = s.recv(1024).decode("ascii")
             
-            self.running()
+            
             
 
 game = Game()
+game.running()
