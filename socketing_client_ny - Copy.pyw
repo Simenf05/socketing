@@ -11,7 +11,7 @@ format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=format, level=logging.DEBUG, datefmt="%H:%M:%S")
 
 
-color = input("color: ")
+color = "red"
 
 HOST = socket.gethostname()
 PORT = 443
@@ -150,6 +150,8 @@ class Game:
                     logging.debug("self.crashed flipped")
                     
                     return
+                    
+                    app.run(debug=True)
 
             if self.activeMove["w"]:
                 self.box.move_ip(0, -5)
@@ -222,6 +224,7 @@ game.running()
 
 time.sleep(1)
 
-logging.debug("Closing socket and quiting")
-
 s.close()
+
+#print("noe")
+#sys.exit()
