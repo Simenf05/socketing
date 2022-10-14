@@ -1,7 +1,6 @@
 import socket
 import random
 import threading
-import sys
 import pygame
 import json
 import time
@@ -128,7 +127,7 @@ class Game:
 
         while not self.crashed:
             self.events = pygame.event.get()
-            # print(self.events)
+            
             for e in self.events:
                 if e.type == pygame.QUIT:
                     logging.debug("Recieved pygame.QUIT event")
@@ -150,8 +149,6 @@ class Game:
                     logging.debug("self.crashed flipped")
                     
                     return
-                    
-                    app.run(debug=True)
 
             if self.activeMove["w"]:
                 self.box.move_ip(0, -5)
@@ -225,6 +222,3 @@ game.running()
 time.sleep(1)
 
 s.close()
-
-#print("noe")
-#sys.exit()

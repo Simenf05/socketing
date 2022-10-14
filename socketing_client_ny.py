@@ -1,7 +1,6 @@
 import socket
 import random
 import threading
-import sys
 import pygame
 import json
 import time
@@ -128,7 +127,7 @@ class Game:
 
         while not self.crashed:
             self.events = pygame.event.get()
-            # print(self.events)
+            
             for e in self.events:
                 if e.type == pygame.QUIT:
                     logging.debug("Recieved pygame.QUIT event")

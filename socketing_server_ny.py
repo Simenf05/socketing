@@ -85,7 +85,7 @@ def conn():
 
         threadDict["thread " + str(nr + 2)].start()
         nr += 1
-        print("sug pikk")
+        
 
     logging.info("kobling slutter")
 
