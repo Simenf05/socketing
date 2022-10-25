@@ -160,7 +160,7 @@ class Game:
                 self.box.move_ip(5, 0)
             
 
-            pygame.Surface.fill(self.screen, "black")
+            self.screen.fill("black")
 
             if self.usedData:
                 for key, d in self.usedData.items():

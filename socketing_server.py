@@ -30,7 +30,10 @@ def recvdata(sock, key):
         
         recving = sock[0].recv(2048)
         
-        recving = json.loads(recving.decode("utf-8"))        
+        try:
+            recving = json.loads(recving.decode("utf-8"))
+        except json.JSONDecodeError:
+            continue    
         getdata.update({key: recving})
 
         if getdata[key]["info"] == "quit":
