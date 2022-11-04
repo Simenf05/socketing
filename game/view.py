@@ -1,6 +1,6 @@
 
 
-class ScreenFormat:
+class View:
     def __init__(self, drawing: dict, layout) -> None:
         
         self.drawing = {}
@@ -10,7 +10,7 @@ class ScreenFormat:
             for key, value in drawing.items():
                 self.drawing.update({key: value})
         
-    
+        
     def addDraw(self, newDraw):
         if type(newDraw) is dict:
             for key, value in newDraw.items():
@@ -36,10 +36,9 @@ class ScreenFormat:
         self.drawing[key].drawSelf()
         
         
-    def action(self):
-        pass
+    def action(self, **kwargs): ...
         
         
-    def __repr__(self) -> str:        
+    def __str__(self) -> str:        
         return "Drawing dict: " + str(self.drawing)
 
