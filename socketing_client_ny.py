@@ -12,7 +12,7 @@ logging.basicConfig(format=format, level=logging.DEBUG, datefmt="%H:%M:%S")
 
 color = input("color: ")
 
-HOST = socket.gethostname()
+HOST = "10.2.1.190"
 PORT = 443
 
 s = socket.socket()

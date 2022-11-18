@@ -1,22 +1,22 @@
 
 TILESIZE = 40
 
+MAPSNAME = ["sub", "main"]
 
-MAP = [
-    "               ",
-    "o              ",
-    "o              ",
-    "o          oooo",
-    "o              ",
-    "               ",
-    "               ",
-    "               ",
-    "               ",
-    "               ",
-    "               ",
-    "               ",
-    "               ",
-    "               ",
-    "               "
+MAP = [[
+    "ooooooooooooooo",
+    "o      o      o",
+    "o      o      o",
+    "o             o",
+    "o      o      o",
+    "o      o      o",
+    "o      o      o",
+    "ooooooooooo ooo",
+    "           a   "], 
+       [
+    "        a      "
+    
+    
+       ]
 ]
 

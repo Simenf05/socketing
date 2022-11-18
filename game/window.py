@@ -1,6 +1,8 @@
 import pygame
 pygame.init()
 
+from . import map as mp
+
 class Window:
     def __init__(self, screensize: tuple, onScreen=None, screenName="screen", dict: dict={}) -> None:
         
@@ -49,7 +51,11 @@ class Window:
         
     def keypressReg(self, keysPressed):
         self.screenDict[self.onScreen].action(pressed=keysPressed)
-        
+    
+    def addPlayerToAllMaps(self, key: str, obj):
+        for map in self.screenDict.values():
+            if type(map) == mp.Map:
+                map.addOPlayer(key, obj)
     
     def __str__(self) -> str:
         string = ""

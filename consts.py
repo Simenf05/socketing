@@ -2,6 +2,7 @@ import pygame.font
 pygame.font.init()
 
 from map import *
+from startscreen import *
 
 BIGFONT = pygame.font.Font(None, 52)
 NORMALFONT = pygame.font.Font(None, 42)
