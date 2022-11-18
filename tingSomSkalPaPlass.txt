@@ -1,0 +1,9 @@
+
+
+ - kommentarer i koden
+
+ - python dokumentasjon i koden
+
+ - Klassediagram (UMC eller noe sånt)
+
+ - Nettverksdiagram
