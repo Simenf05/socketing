@@ -43,48 +43,81 @@
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#game.window.Window" title="game.window.Window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Window</span></code></a></p></td>
-<td><p>Makes and manages window</p></td>
+<td><p>Main class that makes and manages pygame window.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="game.window.Window">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">game.window.</span></span><span class="sig-name descname"><span class="pre">Window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screensize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">onScreen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screenName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'screen'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Window.__init__.dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#game.window.Window" title="Permalink to this definition">¶</a></dt>
-<dd><p>Makes and manages window</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">game.window.</span></span><span class="sig-name descname"><span class="pre">Window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screensize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">onScreen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screenName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'screen'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viewDict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#game.window.Window" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main class that makes and manages pygame window.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="game.window.Window.addScreen">
-<span class="sig-name descname"><span class="pre">addScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newScreen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changeScreen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#game.window.Window.addScreen" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">addScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newScreen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changeScreen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#game.window.Window.addScreen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new object to the viewDict dictionary.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>newScreen (tuple[str, object] | dict): If tuple then the first should be key and then the View() subclass. If dict then {key : value} pairs.
+changeScreen (bool, optional): If the new screen should be set as onScreen. Defaults to False.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="game.window.Window.setOnScreen">
-<span class="sig-name descname"><span class="pre">setOnScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">onScreen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#game.window.Window.setOnScreen" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">setOnScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">onScreen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#game.window.Window.setOnScreen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets new key for the View() subclass on screen.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>onScreen (str): The new key.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="game.window.Window.popScreen">
-<span class="sig-name descname"><span class="pre">popScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#game.window.Window.popScreen" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">popScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#game.window.Window.popScreen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a Veiw() subclass from veiwDict.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>key (str): The key to remove.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="game.window.Window.updateScreen">
-<span class="sig-name descname"><span class="pre">updateScreen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#game.window.Window.updateScreen" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">updateScreen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#game.window.Window.updateScreen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the drawings on the screen.
+Should be called every frame.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="game.window.Window.keypressReg">
-<span class="sig-name descname"><span class="pre">keypressReg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keysPressed</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#game.window.Window.keypressReg" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">keypressReg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keysPressed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#game.window.Window.keypressReg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does the action for the View() subclass on screen.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>keysPressed (Sequence[bool]): Should be the return of pygame.key.get_pressed().</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="game.window.Window.addPlayerToAllMaps">
-<span class="sig-name descname"><span class="pre">addPlayerToAllMaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#game.window.Window.addPlayerToAllMaps" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">addPlayerToAllMaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#game.window.Window.addPlayerToAllMaps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds players to all the Map() objects.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>key (str): The key of the player.
+obj (object): The player object.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="game.window.Window.__str__">
 <span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#game.window.Window.__str__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return str(self).</p>
+<dd><p>Returns the string form of the object.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>str: Screen name, pygame screen object, on screen value, screenDict with all the View() subclasses.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

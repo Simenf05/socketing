@@ -105,7 +105,7 @@ run = True
 while run:
     
     pressed = pygame.key.get_pressed()
-
+    
     screenobj.keypressReg(pressed)
     
     screenobj.updateScreen()

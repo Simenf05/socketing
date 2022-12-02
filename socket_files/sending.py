@@ -1,5 +1,5 @@
 import json
-import stoppableThread
+from . import stoppableThread
 class Send(stoppableThread.StoppableThread):
     """Class made to send data to the server.
 
