@@ -1,0 +1,47 @@
+:py:mod:`game.window`
+=====================
+
+.. py:module:: game.window
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.window.Window
+
+
+
+
+.. py:class:: Window(screensize: tuple, onScreen=None, screenName='screen', dict: Window.__init__.dict = {})
+
+   Makes and manages window
+
+   .. py:method:: addScreen(newScreen, changeScreen: bool = False)
+
+
+   .. py:method:: setOnScreen(onScreen: str)
+
+
+   .. py:method:: popScreen(key: str)
+
+
+   .. py:method:: updateScreen()
+
+
+   .. py:method:: keypressReg(keysPressed)
+
+
+   .. py:method:: addPlayerToAllMaps(key: str, obj)
+
+
+   .. py:method:: __str__() -> str
+
+      Return str(self).
+
+
+

@@ -1,15 +1,30 @@
-
 import socket
-import time
 
 import stoppableThread
 import recving
-import __main__
+# import __main__
 
 
 class Listen(stoppableThread.StoppableThread):
+    """Class made for listening for clients and acceping connections.
+
+    Is started by the Server Thread and will start offspring-threads of Recving().
     
-    def __init__(self, running, s: socket.socket, sockets, threads, host, port, getData) -> None:
+    Inherits from StoppableThread.
+    """
+    
+    def __init__(self, running: bool, s: socket.socket, sockets: dict, threads: dict, host: str, port: int, getData: dict) -> None:
+        """Binds the socket to the specified host and port, enables the server to accept connection by listening for 5 connections. 
+
+        Args:
+            running (bool): Should be True.
+            s (socket.socket): Main socket object that will be bound and accepted on.
+            sockets (dict): Dictionary containing all the socket connections.
+            threads (dict): Dictionray containing all the running Threads. 
+            host (str): The host to bind to.
+            port (int): The port to bind to.
+            getData (dict): The data that will be sent and changed by the connections.
+        """
         super().__init__()
         
         self.s = s
@@ -24,6 +39,7 @@ class Listen(stoppableThread.StoppableThread):
     
         
     def run(self) -> None:
+        """Method that will accept connections and start Recving() threads."""
         
         nr = 1
         

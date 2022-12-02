@@ -2,11 +2,11 @@
 
 draw = {
     "text_overskrift" : (300, 100, "Hei og ha en god dag", "white"),
-    "input_name" : (200, 200, 200, 20, "Skriv navn her"),
-    "input_password" : (200, 300, 200, 20, "Skriv passord her"),
-    "input_color" : (200, 400, 200, 20, "Skriv farge her"),
-    "input_ip" : (200, 500, 200, 20, "Skriv ip her"),
-    "button_done" : [200, 550, 100, 20, "screen", "main", "ENTER"]
+    "input_name" : (200, 200, 200, 30, "Skriv navn her"),
+    "input_password" : (200, 300, 200, 30, "Skriv passord her"),
+    "input_color" : (200, 400, 200, 30, "Skriv farge her"),
+    "input_ip" : (200, 500, 200, 30, "Skriv ip her"),
+    "button_done" : [200, 550, 100, 30, "screen", "map1", "ENTER"]
 }
 
 settingLayout = {

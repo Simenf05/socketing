@@ -1,0 +1,35 @@
+:py:mod:`sending`
+=================
+
+.. py:module:: sending
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   sending.Send
+
+
+
+
+.. py:class:: Send(running: bool, sockets: dict, getData: dict)
+
+   Bases: :py:obj:`stoppableThread.StoppableThread`
+
+   Class made for sending data to multiple clients.
+
+   Is started by the Server Thread.
+
+   Inherits from StoppableThread.
+
+   .. py:method:: run() -> None
+
+      Method that will send the data out to all the clients.
+
+
+

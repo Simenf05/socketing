@@ -1,0 +1,65 @@
+:py:mod:`game.view`
+===================
+
+.. py:module:: game.view
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.view.View
+
+
+
+
+.. py:class:: View(drawing: dict, layout)
+
+   Class to be subclassed to create objects that can contain derived objects of ComponentFormat().
+       
+
+   .. py:method:: addDraw(newDraw: tuple[str, object] | dict) -> None
+
+      Adds a new object to the drawing dictionary.
+
+      Args:
+          newDraw (tuple[str, object] | dict): If tuple then the first should be key and then the object. If dict then {key : value} pairs.
+
+
+   .. py:method:: popDraw(key: str) -> None
+
+      Removes the key from drawing dictionary.
+
+      Args:
+          key (str): Key of object to remove.
+
+
+   .. py:method:: drawAll(screen_: object) -> None
+
+      Draws all the components in the drawing dictionary.
+
+      Args:
+          screen_ (object): Main Window() object.
+
+
+   .. py:method:: draw(key: str) -> None
+
+      Draws the one key from the drawing dictionary.
+
+      Args:
+          key (str): The key that should be drawn.
+
+
+   .. py:method:: action(**kwargs)
+
+
+   .. py:method:: __str__() -> str
+
+      Returns the string form of the class.
+
+
+

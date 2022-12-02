@@ -1,0 +1,52 @@
+:py:mod:`socket_files.connection`
+=================================
+
+.. py:module:: socket_files.connection
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   socket_files.connection.Connection
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   socket_files.connection.format
+
+
+.. py:data:: format
+   :annotation: = %(levelname)-20s : %(asctime)-10s : %(message)s
+
+   
+
+.. py:class:: Connection(data, host: str, port: int)
+
+   Object used to connecting to the server.
+
+   .. py:method:: disconnect()
+
+      Disconnect form the server
+
+
+   .. py:method:: conn()
+
+      Connect to the server
+
+
+   .. py:method:: recv()
+
+      work in progress
+
+
+

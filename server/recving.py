@@ -3,13 +3,28 @@ import stoppableThread
 import json
 import __main__
 
-import time
 
 class Recving(stoppableThread.StoppableThread):
+    """Class made for receiving data from the multiple clients.
+
+    Is started by the Listen Thread.
     
-    def __init__(self, running, s: socket.socket, sock, getData, key) -> None:
+    Inherits from StoppableThread.
+    """
+    
+    def __init__(self, running: bool, s: socket.socket, sock: socket.socket, getData: dict, key: str) -> None:
+        """Initializes the variables needed.
+
+        Args:
+            running (bool): Should be True.
+            s (socket.socket): Main socket object. 
+            sock (socket.socket): Socket object made for the connection. 
+            getData (dict): Dictionary containing alle the players data.
+            key (str): The key that this connection will manipulate. 
+        """
         super().__init__()
         
+        # potensiell cleanup med self.s
         self.s = s
         self.sock = sock
         self.getData = getData
@@ -17,10 +32,9 @@ class Recving(stoppableThread.StoppableThread):
         
         self.running = running
     
-    def quit(self):
-        self.running = False
     
-    def run(self):
+    def run(self) -> None:
+        """Method that will handle data sent from the connection."""
         
         while self.running:
             

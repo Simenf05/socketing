@@ -1,4 +1,4 @@
-from pygame import K_DOWN, K_ESCAPE, K_LEFT, K_RIGHT, K_UP
+from pygame import K_DOWN, K_LEFT, K_RIGHT, K_UP
 import game.view as view
 import time
 import logging
@@ -8,23 +8,35 @@ logging.basicConfig(format=format, level=logging.DEBUG, datefmt="%H:%M:%S")
 
 
 class Menu(view.View):
+    """General class for menus to be shown on Window().
+
+    Inherits from View.
+    """
     
-    def __init__(self, drawing, layout, timediff: float =.16) -> None:
+    def __init__(self, drawing: dict, layout: object, timediff: float =.16) -> None:
+        """Sets up the timing.
+
+        Args:
+            drawing (object): Dictionary containing everything to draw.
+            layout (object): Layout() that can be navigated with the arrows.
+            timediff (float, optional): Time between actions and keypresses. Defaults to .16.
+        """
         super().__init__(drawing, layout)
         
         self.nowTime = time.time()
         self.lastTime = {
-            "up": self.nowTime,
-            "down": self.nowTime,
-            "left": self.nowTime,
-            "right": self.nowTime,
+            "up"    : self.nowTime,
+            "down"  : self.nowTime,
+            "left"  : self.nowTime,
+            "right" : self.nowTime,
             "action": self.nowTime
             }
         
         self.timeDiff = timediff
         
         
-    def action(self, **kwargs):
+    def action(self, **kwargs) -> None:
+        """Moves the selected on the layout. Will be called every frame."""
         self.nowTime = time.time()
         
         kwargs.update({"actionLast": self.lastTime["action"]})

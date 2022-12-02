@@ -4,6 +4,7 @@ pygame.init()
 from . import map as mp
 
 class Window:
+    """Makes and manages window"""
     def __init__(self, screensize: tuple, onScreen=None, screenName="screen", dict: dict={}) -> None:
         
         self.screenName = screenName
@@ -42,6 +43,8 @@ class Window:
         
     def updateScreen(self):
         self.screen.fill("black")
+        
+        # print(self.screenDict)
         
         self.screenDict[self.onScreen].drawAll(self.screen)
         

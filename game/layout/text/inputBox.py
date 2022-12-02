@@ -4,6 +4,8 @@ pygame.init()
 
 import game.layout.componentFormat as componentFormat
 
+# keys that the inputbox will register
+# can be overridden
 keyboard = [
     pygame.K_a,
     pygame.K_b,
@@ -47,8 +49,27 @@ keyboard = [
 
 
 class InputBox(componentFormat.ComponentFormat):
+    """Inputbox to type in.
+
+    Inherits from ComponentFormat.
+    """
     
     def __init__(self, x: int, y: int, w: int, h: int, text: str="", color_: str | tuple= "white", bgcolor_: str | tuple= "black", fontSize: int = 32, timeDiff: float=.2, backspaceTimeDiff: float=.1, width: int=2) -> None:
+        """Sets up all the timing for the keys and color.
+
+        Args:
+            x (int): X position.
+            y (int): Y position.
+            w (int): Width.
+            h (int): Height.
+            text (str, optional): Standard text in the inputbox. Defaults to "".
+            color_ (str | tuple, optional): Color of the inputbox, can be rgb tuple or pygame color string. Defaults to "white".
+            bgcolor_ (str | tuple, optional): Background color of inputbox, can be rgb or pygame color string. Defaults to "black".
+            fontSize (int, optional): Fontsize that will shrink depending on the size of the inputbox. Defaults to 32.
+            timeDiff (float, optional): Time between key reistration. Defaults to .2.
+            backspaceTimeDiff (float, optional): Time between backspace registration. Defaults to .1.
+            width (int, optional): Width of the border around the inputbox. Defaults to 2.
+        """
         
         super().__init__(x, y)
         
@@ -76,13 +97,19 @@ class InputBox(componentFormat.ComponentFormat):
         
         self.refresh()
         
-    def get_drawinfo(self):
+    def get_drawinfo(self) -> tuple[pygame.Surface, list[int]]:
+        """Returns the information needed to blit the inputbox.
+
+        Returns:
+            tuple[pygame.Surface, list[int]]: First is the pygame surface and then the position. 
+        """
         self.lineTime = round(time.time())
         self.visualRefresh()
         return self.surface, self.coords
     
     
-    def visualRefresh(self):
+    def visualRefresh(self) -> None:
+        """Updates all the visual elements of the inputbox."""
         self.surface = pygame.Surface(self.size)
         self.rect = pygame.Rect(0, 0, self.size[0], self.size[1])
         
@@ -98,6 +125,7 @@ class InputBox(componentFormat.ComponentFormat):
     
     
     def refresh(self):
+        """Refreshes the font size and visuals."""
         self.nowTime = time.time()
         
         if self.text:
@@ -109,13 +137,24 @@ class InputBox(componentFormat.ComponentFormat):
     
     
     def getText(self) -> str:
+        """Get the text present in the inputbox.
+
+        Returns:
+            str: The text in the box.
+        """
         return str(self.text)
     
-    def changeText(self, newText: str):
+    def changeText(self, newText: str) -> None:
+        """Changes the text in the inputbox.
+
+        Args:
+            newText (str): The new text.
+        """
         self.text = newText
         self.refresh()
     
-    def action(self, **kwargs):
+    def action(self, **kwargs) -> None:
+        """Action performed every frame to check if it was pressed."""
         self.nowTime = time.time()
         
         if kwargs["pressed"][pygame.K_BACKSPACE]:
@@ -136,14 +175,21 @@ class InputBox(componentFormat.ComponentFormat):
                             self.changeText(self.text + pygame.key.name(key))
                     self.lastTime[pygame.key.name(key)] = self.nowTime
                     
-    def selected(self):
+    def selected(self) -> None:
+        """Sets the inputbox to be selected."""
         self.width += 1
         self.selectLine = True
         
-    def deselected(self):
+    def deselected(self) -> None:
+        """Sets the inputbox to be deselected."""
         self.width -= 1
         self.selectLine = False
         
     def __str__(self) -> str:
+        """The string form of the object.
+
+        Returns:
+            str: Text of the inputbox.
+        """
         return str(self.text)
     

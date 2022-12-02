@@ -1,0 +1,35 @@
+:py:mod:`listen`
+================
+
+.. py:module:: listen
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   listen.Listen
+
+
+
+
+.. py:class:: Listen(running: bool, s: socket.socket, sockets: dict, threads: dict, host: str, port: int, getData: dict)
+
+   Bases: :py:obj:`stoppableThread.StoppableThread`
+
+   Class made for listening for clients and acceping connections.
+
+   Is started by the Server Thread and will start offspring-threads of Recving().
+
+   Inherits from StoppableThread.
+
+   .. py:method:: run() -> None
+
+      Method that will accept connections and start Recving() threads.
+
+
+

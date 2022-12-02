@@ -1,0 +1,35 @@
+:py:mod:`game.layout.blocks.players.player`
+===========================================
+
+.. py:module:: game.layout.blocks.players.player
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.blocks.players.player.Player
+
+
+
+
+.. py:class:: Player(x: int, y: int, path: str, speed: int = 5)
+
+   Bases: :py:obj:`game.layout.blocks.blockFormat.BlockFormat`
+
+   Main player class that can be controlled when playing.
+
+   Inherits from BlockFormat.
+
+   .. py:method:: controls(**kwargs) -> None
+
+      Moves the player. 
+
+      Gets kwargs['col'] and kwargs['pressed'] from Map().
+
+
+

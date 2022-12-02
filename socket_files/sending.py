@@ -1,18 +1,28 @@
-import socket
 import json
-
 import stoppableThread
-
 class Send(stoppableThread.StoppableThread):
+    """Class made to send data to the server.
+
+    Inherits from StoppableThread.
+    """
     
-    def __init__(self, s, running, playerData) -> None:
+    def __init__(self, s, running: bool, playerData: dict) -> None:
+        """Setup for sending with s.
+
+        Args:
+            s (socket.socket): The socket object to send with.
+            running (bool): Should be True.
+            playerData (dict): Data that will be sent, this can be changed while the thread is running.
+        """
+        
         super(Send, self).__init__()
         
         self.s = s
         self.running = running
         self.playerData = playerData
     
-    def run(self):
+    def run(self) -> None:
+        """Method that will be called when Send.start() is called."""
         
         while self.running:
             if self.stopped():

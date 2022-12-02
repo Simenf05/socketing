@@ -1,0 +1,19 @@
+:py:mod:`startscreen`
+=====================
+
+.. py:module:: startscreen
+
+
+Module Contents
+---------------
+
+.. py:data:: draw
+   
+
+   
+
+.. py:data:: settingLayout
+   
+
+   
+

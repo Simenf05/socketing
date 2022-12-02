@@ -1,0 +1,27 @@
+:py:mod:`game.layout.blocks`
+============================
+
+.. py:module:: game.layout.blocks
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   action/index.rst
+   players/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   blockFormat/index.rst
+   empty/index.rst
+   wall/index.rst
+
+

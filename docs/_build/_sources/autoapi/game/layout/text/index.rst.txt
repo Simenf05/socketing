@@ -1,0 +1,16 @@
+:py:mod:`game.layout.text`
+==========================
+
+.. py:module:: game.layout.text
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   inputBox/index.rst
+   textBox/index.rst
+
+

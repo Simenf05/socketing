@@ -1,0 +1,16 @@
+:py:mod:`game.layout.button`
+============================
+
+.. py:module:: game.layout.button
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   buttonFormat/index.rst
+   nextScreenBtn/index.rst
+
+

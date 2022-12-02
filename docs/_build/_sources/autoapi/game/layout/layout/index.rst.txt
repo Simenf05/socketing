@@ -1,0 +1,95 @@
+:py:mod:`game.layout.layout`
+============================
+
+.. py:module:: game.layout.layout
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.layout.Layout
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.layout.list
+
+
+.. py:class:: Layout(dimensions: tuple, objList: None | list = None, start: tuple = (1, 1), fillerValue: Any = None)
+
+   Layout to keep order over the components and select them with the arrows.
+
+   .. py:method:: setValue(obj: object, pos: tuple) -> None
+
+      Sets the object in a position of the layout.
+
+      NOTE: The first object in the layout has pos (1, 1).
+
+      Args:
+          obj (object): Object to set in, should inherit from ComponentFormat.
+          pos (tuple): Position to place.
+
+      Raises:
+          IndexError: The position can not be 0.
+
+
+   .. py:method:: updateSelected(newPos: tuple) -> object
+
+      Selects the position and deselects that last selection.
+
+      Args:
+          newPos (tuple): The position of the new object to be selected.
+
+      Returns:
+          object: Returns the new selected object.
+
+
+   .. py:method:: doAction(**kwargs) -> None
+
+      Does the action() of the current position.
+
+
+   .. py:method:: updatePos(newPos: tuple) -> None
+
+      Moves to a new position and selects that position.
+
+      Args:
+          newPos (tuple): New position to move to.
+
+      Raises:
+          IndexError: If the new pos is out of range on x.
+          IndexError: If the new pos is out of range on y.
+
+
+   .. py:method:: getPos() -> list[int]
+
+      Returns the position.
+
+      Returns:
+          list: First the x pos and then the y pos.
+
+
+   .. py:method:: __str__() -> str
+
+      Retruns the string form of the object.
+
+      Returns:
+          str: Values from the layout.
+
+
+
+.. py:data:: list
+   :annotation: = [['heisann', [2, 2]], ['hvordan gar dagen din da', [1, 1]], ['haper den gar bra :)', [4, 4]]]
+
+   
+

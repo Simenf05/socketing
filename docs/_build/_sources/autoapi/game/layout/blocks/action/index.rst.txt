@@ -1,0 +1,16 @@
+:py:mod:`game.layout.blocks.action`
+===================================
+
+.. py:module:: game.layout.blocks.action
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   actionWall/index.rst
+   nextScreenBlck/index.rst
+
+

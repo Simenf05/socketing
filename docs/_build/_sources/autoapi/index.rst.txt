@@ -1,0 +1,27 @@
+API Reference
+=============
+
+This page contains auto-generated API reference documentation [#f1]_.
+
+.. toctree::
+   :titlesonly:
+
+   /autoapi/consts/index
+   /autoapi/map/index
+   /autoapi/socketing_client_ny/index
+   /autoapi/socketing_server/index
+   /autoapi/startscreen/index
+   /autoapi/test/index
+   /autoapi/test2/index
+   /autoapi/conf/index
+   /autoapi/game/index
+   /autoapi/database/index
+   /autoapi/easyconnection/index
+   /autoapi/listen/index
+   /autoapi/recving/index
+   /autoapi/sending/index
+   /autoapi/server/index
+   /autoapi/stoppableThread/index
+   /autoapi/socket_files/index
+
+.. [#f1] Created with `sphinx-autoapi <https://github.com/readthedocs/sphinx-autoapi>`_

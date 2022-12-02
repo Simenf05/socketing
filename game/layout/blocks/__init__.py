@@ -1,3 +1,4 @@
+# imports all the modules
 
 from . import wall
 from . import empty

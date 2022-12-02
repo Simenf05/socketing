@@ -1,0 +1,28 @@
+:py:mod:`game.layout.blocks.wall`
+=================================
+
+.. py:module:: game.layout.blocks.wall
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.blocks.wall.Wall
+
+
+
+
+.. py:class:: Wall(x: int, y: int, path: str)
+
+   Bases: :py:obj:`game.layout.blocks.blockFormat.BlockFormat`
+
+   Class for the wall blocks that have collition.
+
+   Inherits from BlockFormat.
+
+

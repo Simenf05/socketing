@@ -1,7 +1,4 @@
-import time
 import socket
-import json
-import threading
 import logging
 
 import listen
@@ -11,8 +8,18 @@ format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=format, level=logging.DEBUG, datefmt="%H:%M:%S")
 
 class Server:
+    """Main class for the server side scripts.
+    
+    This should recive and send data to the clients while shutting down closed connections and accepting new connections.
+    """
     
     def __init__(self, HOST: str, PORT: int) -> None:
+        """Initializes the server on set host address and port.
+
+        Args:
+            HOST (str): The host to serve from.
+            PORT (int): The port to use.
+        """
         
         self.HOST = HOST
         self.PORT = PORT
@@ -30,20 +37,20 @@ class Server:
         self.listening = listen.Listen(self.running ,self.s, self.sockets, self.threads, self.HOST, self.PORT, self.getData)
         self.sending = sending.Send(self.running, self.sockets, self.getData)
         
-    def run(self):
+    def run(self) -> None:
+        """Starts the server."""
         
         self.listening.start()
         self.sending.start()
         
-    def close(self):
+    def close(self) -> None:
+        """Closes the server and the socket object."""
         
         self.listening.stop()
         self.listening.join()
         
         self.sending.stop()
         self.sending.join()
-        
-        # print(self.threads)
         
         for thread in self.threads.values():
             
@@ -53,20 +60,23 @@ class Server:
         self.s.close()
         
 
-ip = socket.gethostbyname(socket.gethostname())
-port = 443
+# Code that starts the server
+
+if __name__ == "__main__":
+    ip = socket.gethostbyname(socket.gethostname())
+    port = 443
 
 
-print(f"Server on ip: {ip} and port: {port}")
+    print(f"Server on ip: {ip} and port: {port}")
 
-server = Server(ip, port)
+    server = Server(ip, port)
 
-server.run()
+    server.run()
 
-while True:
-    if input("write 'quit' to stop the server: ") == "quit":
-        if input("sure y / n: ") in ["y", "Y"]:
-            break
-        
-server.close()
+    while True:
+        if input("write 'quit' to stop the server: ") == "quit":
+            if input("sure y / n: ") in ["y", "Y"]:
+                break
+            
+    server.close()
 

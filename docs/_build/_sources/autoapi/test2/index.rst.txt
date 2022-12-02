@@ -1,0 +1,79 @@
+:py:mod:`test2`
+===============
+
+.. py:module:: test2
+
+
+Module Contents
+---------------
+
+.. py:data:: SIZE
+   :annotation: = 600
+
+   
+
+.. py:data:: screenobj
+   
+
+   
+
+.. py:data:: mapdict
+   
+
+   
+
+.. py:data:: a_count
+   :annotation: = 0
+
+   
+
+.. py:data:: mapLayout
+   
+
+   
+
+.. py:data:: button
+   
+
+   
+
+.. py:data:: player
+   
+
+   
+
+.. py:data:: maps
+   
+
+   
+
+.. py:data:: newDraw
+   
+
+   
+
+.. py:data:: newLayout
+   
+
+   
+
+.. py:data:: startLayout
+   
+
+   
+
+.. py:data:: start
+   
+
+   
+
+.. py:data:: run
+   :annotation: = True
+
+   
+
+.. py:data:: pressed
+   
+
+   
+

@@ -6,8 +6,21 @@ import __main__
 
 
 class Send(stoppableThread.StoppableThread):
+    """Class made for sending data to multiple clients.
+
+    Is started by the Server Thread.
     
-    def __init__(self, running, sockets, getData) -> None:
+    Inherits from StoppableThread.
+    """
+    
+    def __init__(self, running: bool, sockets: dict, getData: dict) -> None:
+        """Initializes where to send to and what to send. 
+
+        Args:
+            running (bool): This should be True. 
+            sockets (dict): Dictionary containing all the connections to send to.
+            getData (dict): All the data to send, this will be manipulated by other threads. 
+        """
         super(Send, self).__init__()
         
         self.sockets = sockets
@@ -15,6 +28,7 @@ class Send(stoppableThread.StoppableThread):
         self.running = running
     
     def run(self) -> None:
+        """Method that will send the data out to all the clients."""
         
         while self.running:
             

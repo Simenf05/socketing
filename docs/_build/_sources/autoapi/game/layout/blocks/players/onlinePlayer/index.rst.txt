@@ -1,0 +1,28 @@
+:py:mod:`game.layout.blocks.players.onlinePlayer`
+=================================================
+
+.. py:module:: game.layout.blocks.players.onlinePlayer
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.blocks.players.onlinePlayer.OnlinePlayer
+
+
+
+
+.. py:class:: OnlinePlayer(x: int, y: int, path: str)
+
+   Bases: :py:obj:`game.layout.blocks.blockFormat.BlockFormat`
+
+   Class for the players controlled by other people.
+
+   Inherits from BlockFormat.
+
+

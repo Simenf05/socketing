@@ -1,0 +1,29 @@
+:py:mod:`socket_files.marie`
+============================
+
+.. py:module:: socket_files.marie
+
+
+Module Contents
+---------------
+
+.. py:data:: noe
+   
+
+   
+
+.. py:data:: noe2
+   
+
+   
+
+.. py:data:: noe3
+   
+
+   
+
+.. py:data:: noe4
+   
+
+   
+

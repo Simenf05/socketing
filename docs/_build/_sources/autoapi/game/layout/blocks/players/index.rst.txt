@@ -1,0 +1,16 @@
+:py:mod:`game.layout.blocks.players`
+====================================
+
+.. py:module:: game.layout.blocks.players
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   onlinePlayer/index.rst
+   player/index.rst
+
+

@@ -1,0 +1,27 @@
+:py:mod:`game.layout`
+=====================
+
+.. py:module:: game.layout
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   blocks/index.rst
+   button/index.rst
+   text/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   componentFormat/index.rst
+   layout/index.rst
+
+

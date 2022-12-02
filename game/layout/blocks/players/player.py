@@ -5,7 +5,19 @@ from pygame import K_RIGHT, K_UP, K_LEFT, K_DOWN
 import game.layout.blocks.blockFormat as blockFormat
 
 class Player(blockFormat.BlockFormat):
-    def __init__(self, x: int, y: int, path: str, speed=5) -> None:
+    """Main player class that can be controlled when playing.
+
+    Inherits from BlockFormat.
+    """
+    def __init__(self, x: int, y: int, path: str, speed: int = 5) -> None:
+        """Sets up bool vars and assigns speed.
+
+        Args:
+            x (int): X position.
+            y (int): Y position.
+            path (str): Path to the image used for graphics.
+            speed (int, optional): The speed the player will move at. Defaults to 5.
+        """
         super().__init__(x, y, path)
 
         self.speed = speed
@@ -24,7 +36,11 @@ class Player(blockFormat.BlockFormat):
         self.moveRect = pygame.rect.Rect(self.coords[0], self.coords[1], self.size[0], self.size[1])
     
     
-    def controls(self, **kwargs):
+    def controls(self, **kwargs) -> None:
+        """Moves the player. 
+        
+        Gets kwargs['col'] and kwargs['pressed'] from Map().
+        """
         
         for direction in self.hittingWall:
             

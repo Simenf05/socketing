@@ -1,0 +1,72 @@
+:py:mod:`game.layout.text.textBox`
+==================================
+
+.. py:module:: game.layout.text.textBox
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.text.textBox.TextBox
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.text.textBox.txt
+
+
+.. py:class:: TextBox(x: int, y: int, text: str, color_: str | tuple = 'white', fontObj: pygame.font.Font = pygame.font.Font(None, 32))
+
+   Bases: :py:obj:`game.layout.componentFormat.ComponentFormat`
+
+   Textbox to show text in.
+
+   Inherits from ComponentFormat.
+
+   .. py:method:: get_drawinfo() -> tuple[pygame.Surface, list[int]]
+
+      Returns the needed to blit the textbox.
+
+      Returns:
+          tuple[pygame.Surface, list[int]]: First is the pygame surface and then the position. 
+
+
+   .. py:method:: refresh() -> None
+
+      Refreshes the font size and visuals.
+
+
+   .. py:method:: selected() -> None
+
+      Sets the textbox to be selected.
+
+
+   .. py:method:: deselected() -> None
+
+      Sets the textbox to be deselected.
+
+
+   .. py:method:: __str__() -> str
+
+      Retruns the string form of the object.
+
+      Returns:
+          str: Text of the textbox.
+
+
+
+.. py:data:: txt
+   
+
+   
+

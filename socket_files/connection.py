@@ -6,8 +6,16 @@ format = '%(levelname)-20s : %(asctime)-10s : %(message)s'
 logging.basicConfig(format=format, level=logging.DEBUG, datefmt="%H:%M:%S")
 
 class Connection:
+    """Object used to connecting to the server."""
     
     def __init__(self, data, host: str, port: int) -> None:
+        """_summary_
+
+        Args:
+            data (any): Data that will be sent and cheanged on recving
+            host (str): The host to connect to
+            port (int): The port to connect on
+        """
         
         self.s = socket.socket()
         self.HOST = host
@@ -21,6 +29,7 @@ class Connection:
         
         
     def disconnect(self):
+        """Disconnect form the server"""
         
         endData = json.dumps({
             "info" : "quit",
@@ -34,20 +43,14 @@ class Connection:
     
     
     def conn(self):
+        """Connect to the server"""
         
         self.s.connect((self.HOST, self.PORT))
         
         
         
     def recv(self):
+        """work in progress"""
         noe = self.s.recv(1024)
         print(noe)
 
-    
-
-logging.info("noe")
-
-conn = Connection("10.2.1.190", 443)
-    
-conn.conn()    
-conn.recv()

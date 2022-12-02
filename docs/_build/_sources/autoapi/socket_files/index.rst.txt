@@ -1,0 +1,19 @@
+:py:mod:`socket_files`
+======================
+
+.. py:module:: socket_files
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   connection/index.rst
+   marie/index.rst
+   recving/index.rst
+   sending/index.rst
+   stoppableThread/index.rst
+
+

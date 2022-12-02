@@ -9,74 +9,53 @@ SIZE = 600
 
 screenobj = game.window.Window((SIZE, SIZE))
 
+mapdict = {}
 
+for map_i in range(len(MAP)):
+    mapdict.update({
+        f"map_{MAPSNAME[map_i]}" : {
+            "drawing" : {},
+            "collition" : [],
+            "actionList" : []
+            }
+    })
 
+a_count = 0
 
-mapdict = {
-    "map0" : {
-        "drawing" : {},
-        "collition" : [],
-        "actionList" : []
-    },
-    "map1" : {
-        "drawing" : {},
-        "collition" : [],
-        "actionList" : []
-    }
-}
-
-
-
-
-subdrawing = {}
-subcollition = []
-subActionList = []
-
-
-for row_i, row in enumerate(MAP[0]):
-    for col_i, col in enumerate(row):
-        
-        if col == " ":
-            mapdict["map0"]["drawing"].update({f"col_i{col_i} row_i{row_i}" + str(row_i) : game.layout.blocks.empty.Empty(TILESIZE * col_i, TILESIZE * row_i, "/bilder/empty.png")})
-            
-        if col == "o":
-            mapdict["map0"]["drawing"].update({f"col_i{col_i} row_i{row_i}" : game.layout.blocks.wall.Wall(TILESIZE * col_i, TILESIZE * row_i, "/bilder/wall.png")})
-            mapdict["map0"]["collition"].append(mapdict["map0"]["drawing"][f"col_i{col_i} row_i{row_i}"].get_collition())
-        
-        if col == "a":
-            mapdict["map0"]["drawing"].update({f"col_i{col_i} row_i{row_i}" : game.layout.blocks.action.nextScreenBlck.NextScreenBlck(TILESIZE * col_i, TILESIZE * row_i, "/bilder/action.png", screenobj, MAPSNAME[0], (100, 100))})
-            mapdict["map0"]["actionList"].append(mapdict["map0"]["drawing"][f"col_i{col_i} row_i{row_i}"])
-
-for row_i, row in enumerate(MAP[1]):
+for map_i, map in enumerate(MAP):
+    for row_i, row in enumerate(map):
         for col_i, col in enumerate(row):
-            
             if col == " ":
-                mapdict["map1"]["drawing"].update({f"col_i{col_i} row_i{row_i}" + str(row_i) : game.layout.blocks.empty.Empty(TILESIZE * col_i, TILESIZE * row_i, "/bilder/empty.png")})
-                
-            if col == "o":
-                mapdict["map1"]["drawing"].update({f"col_i{col_i} row_i{row_i}" : game.layout.blocks.wall.Wall(TILESIZE * col_i, TILESIZE * row_i, "/bilder/wall.png")})
-                mapdict["map1"]["collition"].append(mapdict["map1"]["drawing"][f"col_i{col_i} row_i{row_i}"].get_collition())
+                mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"].update({f"col_i{col_i} row_i{row_i}" + str(row_i) : game.layout.blocks.empty.Empty(TILESIZE * col_i, TILESIZE * row_i, "/bilder/empty.png")})
             
+            if col == "o":
+                mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"].update({f"col_i{col_i} row_i{row_i}" : game.layout.blocks.wall.Wall(TILESIZE * col_i, TILESIZE * row_i, "/bilder/wall.png")})
+                mapdict[f"map_{MAPSNAME[map_i]}"]["collition"].append(mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"][f"col_i{col_i} row_i{row_i}"].get_collition())
+        
             if col == "a":
-                mapdict["map1"]["drawing"].update({f"col_i{col_i} row_i{row_i}" : game.layout.blocks.action.nextScreenBlck.NextScreenBlck(TILESIZE * col_i, TILESIZE * row_i, "/bilder/action.png", screenobj, MAPSNAME[1], (100, 100))})
-                mapdict["map1"]["actionList"].append(mapdict["map1"]["drawing"][f"col_i{col_i} row_i{row_i}"])
-
+                mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"].update({f"col_i{col_i} row_i{row_i}" : game.layout.blocks.action.nextScreenBlck.NextScreenBlck(TILESIZE * col_i, TILESIZE * row_i, "/bilder/action.png", screenobj, ALINKS[a_count], (100, 100))})
+                mapdict[f"map_{MAPSNAME[map_i]}"]["actionList"].append(mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"][f"col_i{col_i} row_i{row_i}"])
+                a_count += 1
+            
 
 mapLayout = game.layout.layout.Layout((1, 1))
 button = game.layout.button.nextScreenBtn.NextScreen(10, 10, 50, 30, screenobj, "start", text="ESC", activeButton=pygame.K_ESCAPE)
 mapLayout.setValue(button, (1, 1))
-
 player = game.layout.blocks.players.player.Player(100, 200, "/bilder/player.png")
 
-mapdict["map1"]["drawing"].update({"button" : button})
-mapdict["map1"]["drawing"].update({"player" : player})
-mapdict["map0"]["drawing"].update({"button" : button})
-mapdict["map0"]["drawing"].update({"player" : player})
+for map in mapdict.values():
+    map["drawing"].update({"escapeButton" : button})
+    map["drawing"].update({"player" : player})
+
+maps = {}
 
 
-
-main = game.map.Map(player, mapdict["map0"]["drawing"], mapLayout, mapdict["map0"]["collition"], mapdict["map0"]["actionList"])
-sub = game.map.Map(player, mapdict["map1"]["drawing"], mapLayout, mapdict["map1"]["collition"], mapdict["map1"]["actionList"])
+for name in MAPSNAME:
+    print(type(mapdict[f"map_{name}"]["actionList"][0]))
+    maps.update({
+        
+        f"map_{name}" : game.map.Map(player, mapdict[f"map_{name}"]["drawing"], mapLayout, mapdict[f"map_{name}"]["collition"], mapdict[f"map_{name}"]["actionList"])
+    })
 
 newDraw = {}
 
@@ -114,9 +93,9 @@ for item in newLayout.values():
 
 start = game.menu.Menu(newDraw, startLayout)
 
-
-screenobj.addScreen(("main", main))
-screenobj.addScreen(("sub", sub))
+for name in MAPSNAME:
+    screenobj.addScreen((name, maps[f"map_{name}"]))
+    
 screenobj.addScreen(("start", start), True)
 
 run = True
