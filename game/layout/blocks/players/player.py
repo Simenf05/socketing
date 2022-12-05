@@ -21,6 +21,7 @@ class Player(blockFormat.BlockFormat):
         super().__init__(x, y, path)
 
         self.speed = speed
+        self.map = ""
     
         self.hittingWall = {
             "top" : False,
@@ -41,6 +42,8 @@ class Player(blockFormat.BlockFormat):
         
         Gets kwargs['col'] and kwargs['pressed'] from Map().
         """
+        
+        self.map = kwargs["mapName"]
         
         for direction in self.hittingWall:
             

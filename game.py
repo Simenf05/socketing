@@ -12,6 +12,17 @@ class Game:
         self.mainwindow = game.window.Window((screenSize, screenSize))
         self.player = game.layout.blocks.players.player.Player(100, 200, "/bilder/player.png")
         
+        self.infodata = ""
+        
+        self.data = {
+            "x" : self.player.coords[0],
+            "y" : self.player.coords[1],
+            "map" : self.player.map,
+            "info" : self.infodata,
+            "color" : "red"
+        }
+        self.connection = socket_files.connection.Connection(self.data)
+        
         self.maps = self.create_maps()
         self.startView = self.create_start()
         
@@ -19,10 +30,8 @@ class Game:
             self.mainwindow.addScreen((name, self.maps[f"map_{name}"]))
         
         self.mainwindow.addScreen(("start", self.startView), True)
-        
-        
     
-    def create_maps(self):
+    def create_maps(self) -> dict[game.map.Map]:
         
         def create_map_dict():
             mapdict = {}
@@ -71,12 +80,12 @@ class Game:
         
         for name in MAPSNAME:
             maps.update({
-                f"map_{name}" : game.map.Map(self.player, mapdict[f"map_{name}"]["drawing"], mapLayout, mapdict[f"map_{name}"]["collition"], mapdict[f"map_{name}"]["actionList"])
+                f"map_{name}" : game.map.Map(self.player, mapdict[f"map_{name}"]["drawing"], mapLayout, mapdict[f"map_{name}"]["collition"], mapdict[f"map_{name}"]["actionList"], name)
             })
 
         return maps
         
-    def create_start(self):
+    def create_start(self) -> game.menu.Menu:
         
         def create_draw(self):
             startDraw = {}
@@ -95,6 +104,11 @@ class Game:
                         item[4] = self.mainwindow
                         startDraw.update({
                             key : game.layout.button.nextScreenBtn.NextScreen(item[0], item[1], item[2], item[3], item[4], item[5], item[6])
+                    })
+                    case "connbutton":
+                        item[4] = self
+                        startDraw.update({
+                            key : game.layout.button.nextScreenAndConnBtn.NextScreenAndConnBtn(item[0], item[1], item[2], item[3], item[4], item[5], item[6])
                     })
             return startDraw
         
@@ -118,15 +132,37 @@ class Game:
         start = game.menu.Menu(draw, layout)
         return start
         
+    def connect_to_server(self, host: str, port: int):
         
+        self.connection.conn(host, port)
+        
+        self.infodata = "new"
+        self.connection.startThreads()
+        
+        self.connection.recv()
         
     
-# setup er ferdig men du må jobbe mer i morgen....
-    
+        
+        
 
 if __name__ == "__main__":
-    
+    run = True
     final = Game(600)
+    
+    while run:
+        
+        pressed = pygame.key.get_pressed()
+        
+        final.mainwindow.keypressReg(pressed)
+        
+        final.mainwindow.updateScreen()
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                run = False
+    
+    
     
     
     

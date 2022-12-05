@@ -2,13 +2,16 @@ import socket
 import json
 import logging
 
+from . import sending
+from . import recving
+
 format = '%(levelname)-20s : %(asctime)-10s : %(message)s'
 logging.basicConfig(format=format, level=logging.DEBUG, datefmt="%H:%M:%S")
 
 class Connection:
     """Object used to connecting to the server."""
     
-    def __init__(self, data, host: str, port: int) -> None:
+    def __init__(self, data) -> None:
         """_summary_
 
         Args:
@@ -18,18 +21,21 @@ class Connection:
         """
         
         self.s = socket.socket()
-        self.HOST = host
-        self.PORT = port
+        self.host = None
+        self.port = None
         
         self.data = data
         
+        self.send = sending.Send(self.s, True, self.data)
+        # self.recv = recving.Recv(noe)
+        
         self.logger = logging.Logger("clientLogger")
-        self.logger.info(f"host is {self.HOST}")
+        self.logger.info(f"Host is {self.host}")
         
-        
+    
         
     def disconnect(self):
-        """Disconnect form the server"""
+        """Disconnect form the server."""
         
         endData = json.dumps({
             "info" : "quit",
@@ -42,15 +48,32 @@ class Connection:
         
     
     
-    def conn(self):
-        """Connect to the server"""
+    def conn(self, *args):
+        """Connect to the server."""
         
-        self.s.connect((self.HOST, self.PORT))
+        if len(args) >= 2:
+            self.host, self.port = args[0], args[1]
+        
+        if not (self.host or self.port):
+            raise TypeError("Host or port not defined.")
+        
+        self.s.connect((self.host, self.port))
+        
+        self.id = self.s.recv()
+        
+    
+    def startThreads(self):
+        self.send.start()
+        # self.recv.start()
+        
+    def stopThreads(self):
+        self.send.stop()
+        # self.recv.stop()
         
         
         
+    
     def recv(self):
-        """work in progress"""
+        # work in progress
         noe = self.s.recv(1024)
         print(noe)
-

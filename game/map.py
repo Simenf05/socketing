@@ -6,7 +6,7 @@ class Map(view.View):
 
     Inherits from View.
     """
-    def __init__(self, player: object, drawing: dict, layout: object, collition: list, actionList: list, onlinePlayer: dict={}, timediff: float =.16) -> None:
+    def __init__(self, player: object, drawing: dict, layout: object, collition: list, actionList: list, mapName: str, onlinePlayer: dict={}, timediff: float =.16) -> None:
         """Sets up time variables and assigns lists.
 
         Args:
@@ -24,6 +24,8 @@ class Map(view.View):
         self.collition = collition
         self.actionList = actionList
         self.player = player
+        
+        self.mapName = mapName
         
         self.onlinePlayers = onlinePlayer
         
@@ -84,6 +86,7 @@ class Map(view.View):
         
         kwargs.update({"col" : self.collition})
         kwargs.update({"act" : self.actionList})
+        kwargs.update({"mapName" : self.mapName})
         
         self.player.controls(**kwargs)
         

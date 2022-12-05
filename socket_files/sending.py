@@ -15,7 +15,7 @@ class Send(stoppableThread.StoppableThread):
             playerData (dict): Data that will be sent, this can be changed while the thread is running.
         """
         
-        super(Send, self).__init__()
+        super().__init__()
         
         self.s = s
         self.running = running
