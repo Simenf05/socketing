@@ -2,3 +2,4 @@
 
 from . import nextScreenBtn
 from . import nextScreenAndConnBtn
+from . import nextScreenAndDelConnBtn

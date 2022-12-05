@@ -4,7 +4,6 @@ import game
 import socket_files
 from consts import *
 
-
 class Game:
     
     def __init__(self, screenSize: int) -> None:
@@ -13,15 +12,19 @@ class Game:
         self.player = game.layout.blocks.players.player.Player(100, 200, "/bilder/player.png")
         
         self.infodata = ""
+        self.color = "red"
         
         self.data = {
             "x" : self.player.coords[0],
             "y" : self.player.coords[1],
             "map" : self.player.map,
             "info" : self.infodata,
-            "color" : "red"
+            "color" : self.color
         }
-        self.connection = socket_files.connection.Connection(self.data)
+        
+        self.onlineData = {}
+        
+        self.connection = socket_files.connection.Connection(self.data, self.onlineData)
         
         self.maps = self.create_maps()
         self.startView = self.create_start()
@@ -69,7 +72,7 @@ class Game:
         mapdict = create_map_objects(self, mapdict)
         
         mapLayout = game.layout.layout.Layout((1, 1))
-        button = game.layout.button.nextScreenBtn.NextScreen(10, 10, 50, 30, self.mainwindow, "start", text="ESC", activeButton=pygame.K_ESCAPE)
+        button = game.layout.button.nextScreenAndDelConnBtn.NextScreenAndDelConnBtn(10, 10, 50, 30, self, "start", text="ESC", activeButton=pygame.K_ESCAPE)
         mapLayout.setValue(button, (1, 1))
         
         for map in mapdict.values():
@@ -139,9 +142,21 @@ class Game:
         self.infodata = "new"
         self.connection.startThreads()
         
+    def disconnect_from_server(self):
         
-    
+        self.connection.disconnect()
+        self.connection.stopThreads()
+        self.connection.refresh_vars()
         
+    def check_online_data(self):
+        
+        for key, item in self.onlineData.copy().items():
+            if key.split("_")[1] == self.connection.get_id():
+                continue
+            
+            # utfylle mer her...
+            pass
+            
         
 
 if __name__ == "__main__":
@@ -158,6 +173,11 @@ if __name__ == "__main__":
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                
+                if final.connection.id:
+                    final.disconnect_from_server()
+                    
+                final.connection.s.close()
                 pygame.quit()
                 run = False
     

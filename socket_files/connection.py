@@ -11,7 +11,7 @@ logging.basicConfig(format=format, level=logging.DEBUG, datefmt="%H:%M:%S")
 class Connection:
     """Object used to connecting to the server."""
     
-    def __init__(self, data) -> None:
+    def __init__(self, data: dict, onlineData: dict) -> None:
         """_summary_
 
         Args:
@@ -23,19 +23,33 @@ class Connection:
         self.s = socket.socket()
         self.host = None
         self.port = None
+        self.id = None
         
         self.data = data
+        self.onlineData = onlineData
         
         self.send = sending.Send(self.s, True, self.data)
-        # self.recv = recving.Recv(noe)
+        self.recv = recving.Recv(self.s, True, self.onlineData)
         
         self.logger = logging.Logger("clientLogger")
         self.logger.info(f"Host is {self.host}")
         
+    def get_id(self):
+        return self.id
     
+    def refresh_vars(self):
+        self.s = socket.socket()
+        self.host = None
+        self.port = None
+        self.id = None
         
+        self.send = sending.Send(self.s, True, self.data)
+        self.recv = recving.Recv(self.s, True)
+    
     def disconnect(self):
         """Disconnect form the server."""
+        
+        self.id = None
         
         endData = json.dumps({
             "info" : "quit",
@@ -44,10 +58,6 @@ class Connection:
         
         self.s.send(endData.encode("utf-8"))
         
-        self.s.close()
-        
-    
-    
     def conn(self, *args):
         """Connect to the server."""
         
@@ -59,22 +69,24 @@ class Connection:
         
         self.s.connect((self.host, self.port))
         
-        self.id = self.s.recv(1024)
-        print(self.id)
+        self.id = self.s.recv(1024).decode("utf-8")
         
     
     def startThreads(self):
         self.send.start()
-        # self.recv.start()
+        
+        self.recv.addId(self.id)
+        
+        self.recv.start()
         
     def stopThreads(self):
         self.send.stop()
-        # self.recv.stop()
+        self.recv.stop()
         
         
         
-    
+    """
     def recv(self):
         # work in progress
         noe = self.s.recv(1024)
-        print(noe)
+        print(noe)"""
