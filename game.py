@@ -139,7 +139,6 @@ class Game:
         self.infodata = "new"
         self.connection.startThreads()
         
-        self.connection.recv()
         
     
         

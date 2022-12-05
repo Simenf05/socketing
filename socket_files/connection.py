@@ -59,7 +59,8 @@ class Connection:
         
         self.s.connect((self.host, self.port))
         
-        self.id = self.s.recv()
+        self.id = self.s.recv(1024)
+        print(self.id)
         
     
     def startThreads(self):

@@ -1,4 +1,5 @@
 import socket
+from json import dumps
 
 import stoppableThread
 import recving
@@ -55,7 +56,7 @@ class Listen(stoppableThread.StoppableThread):
             
             try:
                 self.sockets.update({f"sock_{nr}" : self.s.accept()})
-                self.sockets[f"sock_{nr}"][0].send(f"sock_{nr}")
+                self.sockets[f"sock_{nr}"][0].send(dumps(f"sock_{nr}"))
             
             except TimeoutError:
                 continue 
