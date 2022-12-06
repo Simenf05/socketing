@@ -36,7 +36,7 @@ class NextScreenAndConnBtn(buttonFormat.ButtonFormat):
             if kwargs["pressed"][self.activeButton]:
                 
                 host = self.game.mainwindow.screenDict["start"].drawing["input_ip"].getText()
-                port = 443
+                port = 8069
                 
                 try:
                     self.game.connect_to_server(host, port)

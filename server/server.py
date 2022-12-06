@@ -64,7 +64,7 @@ class Server:
 
 if __name__ == "__main__":
     ip = socket.gethostbyname(socket.gethostname())
-    port = 443
+    port = 8069
 
 
     print(f"Server on ip: {ip} and port: {port}")

@@ -145,7 +145,6 @@ class Game:
         
     def check_online_data(self):
         
-        print(self.onlineData)
         
         for key, item in self.onlineData.copy().items():
             if key.split("_")[1] == self.connection.get_id():
@@ -159,7 +158,6 @@ class Game:
                 self.onlinePlayers.update({key : game.layout.blocks.players.onlinePlayer.OnlinePlayer(item["x"], item["y"], "/bilder/player.png")})
                 self.mainwindow.addPlayerToAllMaps(key, self.onlinePlayers[key])
         
-        print(self.onlinePlayers)
             
             
         
