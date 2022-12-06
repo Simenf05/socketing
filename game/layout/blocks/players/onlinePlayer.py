@@ -19,4 +19,3 @@ class OnlinePlayer(blockFormat.BlockFormat):
         """
         super().__init__(x, y, path)
         
-        

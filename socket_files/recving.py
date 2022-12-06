@@ -3,11 +3,11 @@ import json
 from . import stoppableThread
 class Recv(stoppableThread.StoppableThread):
 
-    def __init__(self, s, running: bool, onlineData: dict) -> None:
+    def __init__(self, s, running: bool, game: object) -> None:
         
         super().__init__()
         
-        self.onlineData = onlineData
+        self.game = game
         
         self.s = s
         self.running = running
@@ -17,6 +17,7 @@ class Recv(stoppableThread.StoppableThread):
     def addId(self, id: str):
         self.id = id.split("_")[1]
     
+    
     def run(self):
         while self.running:
             if self.stopped():
@@ -25,14 +26,18 @@ class Recv(stoppableThread.StoppableThread):
             try:
                 onlineData = self.s.recv(1024).decode("utf-8")
                 onlineData = json.loads(onlineData)
-                self.onlineData = onlineData
+                self.game.onlineData = onlineData
+                
                 
             except json.JSONDecodeError:
+                print("decode error")
                 continue
             
             except (ConnectionAbortedError, ConnectionResetError):
+                print("disconnected")
                 self.stop()
                 
             except OSError:
+                print("osError")
                 self.stop()
                 break

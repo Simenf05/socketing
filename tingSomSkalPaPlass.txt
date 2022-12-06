@@ -4,6 +4,6 @@
 
  - python dokumentasjon i koden
 
- - Klassediagram (UMC eller noe sånt)
+ - Klassediagram (UML eller noe sånt)
 
  - Nettverksdiagram

@@ -4,6 +4,8 @@ import game
 import socket_files
 from consts import *
 
+import time
+
 class Game:
     
     def __init__(self, screenSize: int) -> None:
@@ -11,20 +13,13 @@ class Game:
         self.mainwindow = game.window.Window((screenSize, screenSize))
         self.player = game.layout.blocks.players.player.Player(100, 200, "/bilder/player.png")
         
-        self.infodata = ""
+        self.infodata = "new"
         self.color = "red"
         
-        self.data = {
-            "x" : self.player.coords[0],
-            "y" : self.player.coords[1],
-            "map" : self.player.map,
-            "info" : self.infodata,
-            "color" : self.color
-        }
-        
         self.onlineData = {}
+        self.onlinePlayers = {}
         
-        self.connection = socket_files.connection.Connection(self.data, self.onlineData)
+        self.connection = socket_files.connection.Connection(self)
         
         self.maps = self.create_maps()
         self.startView = self.create_start()
@@ -150,12 +145,22 @@ class Game:
         
     def check_online_data(self):
         
+        print(self.onlineData)
+        
         for key, item in self.onlineData.copy().items():
             if key.split("_")[1] == self.connection.get_id():
+                
                 continue
             
-            # utfylle mer her...
-            pass
+            if item["info"] == "quit":
+                self.onlinePlayers.pop(key)
+            
+            if item["info"] == "new":
+                self.onlinePlayers.update({key : game.layout.blocks.players.onlinePlayer.OnlinePlayer(item["x"], item["y"], "/bilder/player.png")})
+                self.mainwindow.addPlayerToAllMaps(key, self.onlinePlayers[key])
+        
+        print(self.onlinePlayers)
+            
             
         
 
@@ -169,6 +174,8 @@ if __name__ == "__main__":
         
         final.mainwindow.keypressReg(pressed)
         
+        final.check_online_data()
+        
         final.mainwindow.updateScreen()
         
         for event in pygame.event.get():
@@ -180,6 +187,7 @@ if __name__ == "__main__":
                 final.connection.s.close()
                 pygame.quit()
                 run = False
+        
     
     
     

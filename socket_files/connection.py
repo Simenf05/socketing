@@ -11,7 +11,7 @@ logging.basicConfig(format=format, level=logging.DEBUG, datefmt="%H:%M:%S")
 class Connection:
     """Object used to connecting to the server."""
     
-    def __init__(self, data: dict, onlineData: dict) -> None:
+    def __init__(self, game: object) -> None:
         """_summary_
 
         Args:
@@ -25,11 +25,10 @@ class Connection:
         self.port = None
         self.id = None
         
-        self.data = data
-        self.onlineData = onlineData
+        self.game = game
         
-        self.send = sending.Send(self.s, True, self.data)
-        self.recv = recving.Recv(self.s, True, self.onlineData)
+        self.send = sending.Send(self.s, True, self.game)
+        self.recv = recving.Recv(self.s, True, self.game)
         
         self.logger = logging.Logger("clientLogger")
         self.logger.info(f"Host is {self.host}")
@@ -43,8 +42,8 @@ class Connection:
         self.port = None
         self.id = None
         
-        self.send = sending.Send(self.s, True, self.data)
-        self.recv = recving.Recv(self.s, True)
+        self.send = sending.Send(self.s, True, self.game)
+        self.recv = recving.Recv(self.s, True, self.game)
     
     def disconnect(self):
         """Disconnect form the server."""
@@ -70,7 +69,6 @@ class Connection:
         self.s.connect((self.host, self.port))
         
         self.id = self.s.recv(1024).decode("utf-8")
-        
     
     def startThreads(self):
         self.send.start()

@@ -6,7 +6,7 @@ class Send(stoppableThread.StoppableThread):
     Inherits from StoppableThread.
     """
     
-    def __init__(self, s, running: bool, playerData: dict) -> None:
+    def __init__(self, s, running: bool, game: object) -> None:
         """Setup for sending with s.
 
         Args:
@@ -19,7 +19,7 @@ class Send(stoppableThread.StoppableThread):
         
         self.s = s
         self.running = running
-        self.playerData = playerData
+        self.game = game
     
     def run(self) -> None:
         """Method that will be called when Send.start() is called."""
@@ -28,7 +28,13 @@ class Send(stoppableThread.StoppableThread):
             if self.stopped():
                 break
             
-            sendData = self.playerData
+            sendData = {
+                "x" : self.game.player.coords[0],
+                "y" : self.game.player.coords[1],
+                "map" : self.game.player.map,
+                "info" : self.game.infodata,
+                "color" : self.game.color
+            }
             
             jsonData = json.dumps(sendData)
             

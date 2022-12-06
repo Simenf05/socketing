@@ -62,16 +62,22 @@ class Map(view.View):
         """
         self.onlinePlayers.pop(key)
     
-    def drawPlayers(self, screen_: object) -> None:
-        """Draws all the players on the screen.
+    def drawAll(self, screen_: object) -> None:
+        """Draws all the components in the drawing dictionary.
 
         Args:
             screen_ (object): Main Window() object.
-        """
+        """        
+        
+        for obj in self.drawing.values():
+            
+            obj, rect = obj.get_drawinfo()
+            screen_.blit(obj, rect)
         
         for obj in self.onlinePlayers.values():
             obj, rect = obj.get_drawinfo()
             screen_.blit(obj, rect)
+        
     
     def action(self, **kwargs) -> None:
         """Does the action and controls the player. Will be called every frame."""
