@@ -123,9 +123,6 @@ class Database:
             else:
                 color_id = 1
             
-            print(color)
-            print(color_id)
-            
             coords_id = self.new_coords(x, y, map)
             
             sql = "INSERT INTO player (player_name, player_password, coords_coords_id, colr_colr_id) VALUES (%s, %s, %s, %s)"
