@@ -117,8 +117,9 @@ class Database:
             for item in self.colors:
                 if item[1].split(".")[0] in [color, color.capitalize()]:
                     color_id = item[0]
-                else:
-                    color_id = 1
+                    break
+            else:
+                color_id = 1
                     
             coords_id = self.new_coords(x, y, map)
             
