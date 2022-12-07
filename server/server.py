@@ -38,7 +38,7 @@ class Server:
         
         self.db = database.Database("localhost", "root", "", "game_info")
         
-        self.listening = listen.Listen(self.running ,self.s, self.sockets, self.threads, self.HOST, self.PORT, self.getData, self.db)
+        self.listening = listen.Listen(self.running ,self.s, self.sockets, self.threads, self.HOST, self.PORT, self.getData, self.db, self.socketsSend)
         self.sending = sending.Send(self.running, self.socketsSend, self.getData)
         
     def run(self) -> None:
