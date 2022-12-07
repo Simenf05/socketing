@@ -53,14 +53,14 @@ class Game:
                 for row_i, row in enumerate(map):
                     for col_i, col in enumerate(row):
                         if col == " ":
-                            mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"].update({f"col_i{col_i} row_i{row_i}" + str(row_i) : game.layout.blocks.empty.Empty(TILESIZE * col_i, TILESIZE * row_i, "/bilder/empty.png")})
+                            mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"].update({f"col_i{col_i} row_i{row_i}" + str(row_i) : game.layout.blocks.empty.Empty(TILESIZE * col_i, TILESIZE * row_i, "/bilder/grey.png")})
                         
                         if col == "o":
-                            mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"].update({f"col_i{col_i} row_i{row_i}" : game.layout.blocks.wall.Wall(TILESIZE * col_i, TILESIZE * row_i, "/bilder/wall.png")})
+                            mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"].update({f"col_i{col_i} row_i{row_i}" : game.layout.blocks.wall.Wall(TILESIZE * col_i, TILESIZE * row_i, "/bilder/red.png")})
                             mapdict[f"map_{MAPSNAME[map_i]}"]["collition"].append(mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"][f"col_i{col_i} row_i{row_i}"].get_collition())
                     
                         if col == "a":
-                            mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"].update({f"col_i{col_i} row_i{row_i}" : game.layout.blocks.action.nextScreenBlck.NextScreenBlck(TILESIZE * col_i, TILESIZE * row_i, "/bilder/action.png", self.mainwindow, ALINKS[a_count], (100, 100))})
+                            mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"].update({f"col_i{col_i} row_i{row_i}" : game.layout.blocks.action.nextScreenBlck.NextScreenBlck(TILESIZE * col_i, TILESIZE * row_i, "/bilder/green.png", self.mainwindow, ALINKS[a_count], (100, 100))})
                             mapdict[f"map_{MAPSNAME[map_i]}"]["actionList"].append(mapdict[f"map_{MAPSNAME[map_i]}"]["drawing"][f"col_i{col_i} row_i{row_i}"])
                             a_count += 1
 
@@ -147,8 +147,6 @@ class Game:
         self.connection.refresh_vars()
         
     def check_online_data(self):
-        
-        print(self.onlineData)
         
         for key, item in self.onlineData.copy().items():
             

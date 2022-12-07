@@ -64,7 +64,6 @@ class Recving(stoppableThread.StoppableThread):
         
         senddata = json.dumps(senddata)
         senddata = senddata.encode("utf-8")
-        print(senddata)
         self.sock[0].send(senddata)
         
         sleep(.1)
@@ -92,8 +91,6 @@ class Recving(stoppableThread.StoppableThread):
             if data["info"] == "quit":
                 
                 if data["save"]:
-                    
-                    print(self.getData)
                     
                     self.database.save_user(player_info[0][0], self.getData[self.key]["x"], self.getData[self.key]["y"], self.getData[self.key]["map"])
                 
