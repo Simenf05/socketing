@@ -31,6 +31,7 @@ class Send(stoppableThread.StoppableThread):
         }
         
         json_info = json.dumps(info)
+        
         self.s.send(json_info.encode("utf-8"))
         
         startData = self.s.recv(2048).decode("utf-8")

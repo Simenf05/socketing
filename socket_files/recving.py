@@ -1,6 +1,9 @@
 
 import json
 from . import stoppableThread
+
+from time import sleep
+
 class Recv(stoppableThread.StoppableThread):
 
     def __init__(self, s, running: bool, game: object) -> None:
@@ -19,6 +22,9 @@ class Recv(stoppableThread.StoppableThread):
     
     
     def run(self):
+        
+        sleep(.1)
+        
         while self.running:
             if self.stopped():
                 break

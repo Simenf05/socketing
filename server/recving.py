@@ -64,6 +64,7 @@ class Recving(stoppableThread.StoppableThread):
         
         senddata = json.dumps(senddata)
         senddata = senddata.encode("utf-8")
+        print(senddata)
         self.sock[0].send(senddata)
         
         sleep(.1)

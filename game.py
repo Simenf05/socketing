@@ -148,9 +148,10 @@ class Game:
         
     def check_online_data(self):
         
+        print(self.onlineData)
         
         for key, item in self.onlineData.copy().items():
-            # print(key)
+            
             if key.split("_")[1] == self.connection.get_id():
                 
                 continue
