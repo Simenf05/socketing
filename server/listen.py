@@ -66,7 +66,7 @@ class Listen(stoppableThread.StoppableThread):
                 self.stop()
                 break
                 
-            self.threads.update({f"thread_{nr}" : recving.Recving(self.s, self.sockets[f"sock_{nr}"], self.sockets[f"sock_{nr}"], self.getData, f"player_{nr}", self.database)})
+            self.threads.update({f"thread_{nr}" : recving.Recving(self.s, self.sockets[f"sock_{nr}"], self.sockets[f"sock_{nr}"], self.getData, f"player_{nr}", self.database, nr)})
             
             self.threads[f"thread_{nr}"].start()
             nr += 1

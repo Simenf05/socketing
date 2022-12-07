@@ -3,6 +3,7 @@ import stoppableThread
 import json
 import __main__
 
+from time import sleep
 
 class Recving(stoppableThread.StoppableThread):
     """Class made for receiving data from the multiple clients.
@@ -12,7 +13,7 @@ class Recving(stoppableThread.StoppableThread):
     Inherits from StoppableThread.
     """
     
-    def __init__(self, running: bool, s: socket.socket, sock: socket.socket, getData: dict, key: str, database: object) -> None:
+    def __init__(self, running: bool, s: socket.socket, sock: socket.socket, getData: dict, key: str, database: object, socketsSend: dict, nr: int) -> None:
         """Initializes the variables needed.
 
         Args:
@@ -24,11 +25,14 @@ class Recving(stoppableThread.StoppableThread):
         """
         super().__init__()
         
+        self.nr = nr
+        
         self.s = s
         self.sock = sock
         self.getData = getData
         self.key = key
         self.database = database
+        self.socketsSend = socketsSend
         
         self.running = running
     
@@ -61,6 +65,9 @@ class Recving(stoppableThread.StoppableThread):
         senddata = json.dumps(senddata)
         senddata = senddata.encode("utf-8")
         self.sock[0].send(senddata)
+        
+        sleep(.1)
+        self.socketsSend.update({f"sock_{self.nr}" : self.sock})
         
         while self.running:
             

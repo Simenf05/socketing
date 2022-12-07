@@ -33,7 +33,9 @@ class Send(stoppableThread.StoppableThread):
         json_info = json.dumps(info)
         self.s.send(json_info.encode("utf-8"))
         
-        startData = self.s.recv(1024).decode("utf-8")
+        startData = self.s.recv(2048).decode("utf-8")
+        
+        
         startData = json.loads(startData)
         
         self.game.create_player(startData["id"], startData["x"], startData["y"], startData["map"], startData["color"].split(".")[0])
