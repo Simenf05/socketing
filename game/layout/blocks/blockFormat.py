@@ -32,6 +32,13 @@ class BlockFormat(componentFormat.ComponentFormat):
         """Returns the collition of the block."""
         return self.rect
     
+    def set_path(self, path: str):
+        self.imgpath = self.maindir + "/" + path
+        self.img = pygame.image.load(self.imgpath)
+        size = self.img.get_rect()
+        self.size = (size.w, size.h)
+        self.rect = pygame.rect.Rect(self.coords[0], self.coords[1], self.size[0], self.size[1])
+            
     def setPos(self, x: int, y: int) -> None:
         """Sets the position of the block.
 

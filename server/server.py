@@ -3,6 +3,7 @@ import logging
 
 import listen
 import sending
+import database
 
 format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=format, level=logging.DEBUG, datefmt="%H:%M:%S")
@@ -34,7 +35,9 @@ class Server:
         
         self.running = True
         
-        self.listening = listen.Listen(self.running ,self.s, self.sockets, self.threads, self.HOST, self.PORT, self.getData)
+        self.db = database.Database("localhost", "root", "", "game_info")
+        
+        self.listening = listen.Listen(self.running ,self.s, self.sockets, self.threads, self.HOST, self.PORT, self.getData, self.db)
         self.sending = sending.Send(self.running, self.sockets, self.getData)
         
     def run(self) -> None:

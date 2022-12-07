@@ -1,11 +1,21 @@
 
 
-DRAW = {
+"""DRAW = {
     "text_overskrift" : (300, 100, "Hei og ha en god dag", "white"),
     "input_name" : (200, 200, 200, 30, "Skriv navn her"),
     "input_password" : (200, 300, 200, 30, "Skriv passord her"),
     "input_color" : (200, 400, 200, 30, "Skriv farge her"),
     "input_ip" : (200, 500, 200, 30, "172.23.192.1"),
+    "connbutton_done" : [200, 550, 100, 30, "screen", "map1", "ENTER"]
+}
+"""
+
+DRAW = {
+    "text_overskrift" : (300, 100, "Hei og ha en god dag", "white"),
+    "input_name" : (200, 200, 200, 30, "simen"),
+    "input_password" : (200, 300, 200, 30, "123"),
+    "input_color" : (200, 400, 200, 30, "red"),
+    "input_ip" : (200, 500, 200, 30, "172.20.0.1"),
     "connbutton_done" : [200, 550, 100, 30, "screen", "map1", "ENTER"]
 }
 

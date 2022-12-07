@@ -13,7 +13,7 @@ class Listen(stoppableThread.StoppableThread):
     Inherits from StoppableThread.
     """
     
-    def __init__(self, running: bool, s: socket.socket, sockets: dict, threads: dict, host: str, port: int, getData: dict) -> None:
+    def __init__(self, running: bool, s: socket.socket, sockets: dict, threads: dict, host: str, port: int, getData: dict, database: object) -> None:
         """Binds the socket to the specified host and port, enables the server to accept connection by listening for 5 connections. 
 
         Args:
@@ -31,6 +31,7 @@ class Listen(stoppableThread.StoppableThread):
         self.sockets = sockets
         self.threads = threads
         self.getData = getData
+        self.database = database
         
         self.running = running
         
@@ -56,15 +57,16 @@ class Listen(stoppableThread.StoppableThread):
             try:
                 self.sockets.update({f"sock_{nr}" : self.s.accept()})
                 self.sockets[f"sock_{nr}"][0].send(f"sock_{nr}".encode("utf-8"))
+                
             
             except TimeoutError:
-                continue 
+                continue
             
             except OSError:
                 self.stop()
                 break
                 
-            self.threads.update({f"thread_{nr}" : recving.Recving(self.s, self.sockets[f"sock_{nr}"], self.sockets[f"sock_{nr}"], self.getData, f"player_{nr}")})
+            self.threads.update({f"thread_{nr}" : recving.Recving(self.s, self.sockets[f"sock_{nr}"], self.sockets[f"sock_{nr}"], self.getData, f"player_{nr}", self.database)})
             
             self.threads[f"thread_{nr}"].start()
             nr += 1

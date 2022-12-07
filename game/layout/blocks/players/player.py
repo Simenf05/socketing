@@ -9,7 +9,7 @@ class Player(blockFormat.BlockFormat):
 
     Inherits from BlockFormat.
     """
-    def __init__(self, x: int, y: int, path: str, speed: int = 5) -> None:
+    def __init__(self, x: int, y: int, map: str, path: str, speed: int = 5) -> None:
         """Sets up bool vars and assigns speed.
 
         Args:
@@ -21,7 +21,7 @@ class Player(blockFormat.BlockFormat):
         super().__init__(x, y, path)
 
         self.speed = speed
-        self.map = ""
+        self.map = map
     
         self.hittingWall = {
             "top" : False,
@@ -36,6 +36,13 @@ class Player(blockFormat.BlockFormat):
         
         self.moveRect = pygame.rect.Rect(self.coords[0], self.coords[1], self.size[0], self.size[1])
     
+    def reset(self, x, y, map, path):
+        
+        self.coords = [x, y]
+        self.map = map
+        self.set_path(path)
+        
+        pass
     
     def controls(self, **kwargs) -> None:
         """Moves the player. 
@@ -125,7 +132,7 @@ class Player(blockFormat.BlockFormat):
             elif not self.hittingWall["right"]:
                 self.coords[0] += self.speed
             
-        else:    
+        else:
         
             if kwargs["pressed"][K_UP] and not self.hittingWall["top"]:
                 self.coords[1] -= self.speed

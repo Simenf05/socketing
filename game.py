@@ -11,10 +11,13 @@ class Game:
     def __init__(self, screenSize: int) -> None:
         
         self.mainwindow = game.window.Window((screenSize, screenSize))
-        self.player = game.layout.blocks.players.player.Player(100, 200, "/bilder/player.png")
+        self.player = game.layout.blocks.players.player.Player(100, 200, "map1", "bilder/red.png")
+        
+        self.port = 8069
         
         self.infodata = "new"
         self.color = "red"
+        self.id = ...
         
         self.onlineData = {}
         self.onlinePlayers = {}
@@ -147,6 +150,7 @@ class Game:
         
         
         for key, item in self.onlineData.copy().items():
+            # print(key)
             if key.split("_")[1] == self.connection.get_id():
                 
                 continue
@@ -155,10 +159,13 @@ class Game:
                 self.onlinePlayers.pop(key)
             
             if item["info"] == "new":
-                self.onlinePlayers.update({key : game.layout.blocks.players.onlinePlayer.OnlinePlayer(item["x"], item["y"], "/bilder/player.png")})
+                self.onlinePlayers.update({key : game.layout.blocks.players.onlinePlayer.OnlinePlayer(item["x"], item["y"], "/bilder/red.png")})
                 self.mainwindow.addPlayerToAllMaps(key, self.onlinePlayers[key])
         
-            
+    def create_player(self, id: int, x: int, y: int, map: str, color: str):
+        self.color = color
+        self.id = id
+        self.player.reset(x, y, map, f"/bilder/{color}.png")
             
         
 

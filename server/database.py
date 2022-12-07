@@ -30,6 +30,8 @@ class Database:
         )
         
         self.cursor = self.db.cursor()
+        self.cursor.execute("SELECT * FROM colr")
+        self.colors = self.cursor.fetchall()
         
         
     def executeSQL(self, sql: str) -> None:
@@ -85,20 +87,84 @@ class Database:
             sql += f" WHERE {WHERE}"
         self.executeSQL(sql)
         return self.cursor.fetchall()
-        
     
-    
+    def new_coords(self, x: int, y: int, map: str):
+        self.cursor.execute("SELECT * FROM coords")
+        coords_table = self.cursor.fetchall()
         
-"""
+        for col in coords_table:
+            row = (col[1], col[2], col[3])
+            
+            if row == (x, y, map):
+                coords_id = col[0]
+                break
+        else:
+            sql = "INSERT INTO coords (x, y, map) VALUES (%s, %s, %s)"
+            val = (x, y, map)
+            
+            self.cursor.execute(sql, val)
+            self.db.commit()
+            
+            coords_id = self.cursor.lastrowid
+        return coords_id
+    
+    def create_user(self, name: str, password: str, x: int, y: int, map: str, color: str):
+        
+        player = self.get_user_by_name_and_pass(name, password)
+        
+        if not player:
+        
+            for item in self.colors:
+                if item[1].split(".")[0] in [color, color.capitalize()]:
+                    color_id = item[0]
+                else:
+                    color_id = 1
+                    
+            coords_id = self.new_coords(x, y, map)
+            
+            sql = "INSERT INTO player (player_name, player_password, coords_coords_id, colr_colr_id) VALUES (%s, %s, %s, %s)"
+            val = (name, password, coords_id, color_id)
+            
+            self.cursor.execute(sql, val)
+            
+            self.db.commit()
+            
+            player = self.get_user_by_name_and_pass(name, password)
+            return player
+        else:
+            return player
+        
+    def save_user(self, id: int, x: int, y: int, map: str):
+        
+        coords_id = self.new_coords(x, y, map)
+        
+        sql = "UPDATE player SET coords_coords_id=%s WHERE idPlayer = %s"
+        val = (coords_id, id)
+        
+        self.cursor.execute(sql, val)
+        self.db.commit()
+        
+    def get_user_by_name_and_pass(self, name, password):
+        
+        sql = "SELECT * FROM player WHERE player_name=%s AND player_password=%s"
+        val = (name, password)
+        
+        self.cursor.execute(sql, val)
+        players = self.cursor.fetchall()        
+        
+        return players
+        
+        
 
+
+
+"""
 game_info = Database("localhost", "server", "123123", "game_info")
 
-into = "player (player_name, player_password)"
-values = tuple(["arvid", "1223"])
 
-game_info.insertToDB(into, values)
 
-noe = game_info.getFromDB("player", "*")
+game_info.create_user("joon", "jegerkul", 100, 300, "map1", "green")
 
-print(type(noe))
+
+
 """
