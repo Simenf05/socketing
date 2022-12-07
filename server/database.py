@@ -113,14 +113,19 @@ class Database:
         player = self.get_user_by_name_and_pass(name, password)
         
         if not player:
-        
+            
+            
+            
             for item in self.colors:
                 if item[1].split(".")[0] in [color, color.capitalize()]:
                     color_id = item[0]
                     break
             else:
                 color_id = 1
-                    
+            
+            print(color)
+            print(color_id)
+            
             coords_id = self.new_coords(x, y, map)
             
             sql = "INSERT INTO player (player_name, player_password, coords_coords_id, colr_colr_id) VALUES (%s, %s, %s, %s)"
