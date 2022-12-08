@@ -67,3 +67,5 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 INSERT INTO colr (colr) VALUES ('red.png'), ('blue.png'), ('yellow.png'), ('green.png')
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'simenerkul';
