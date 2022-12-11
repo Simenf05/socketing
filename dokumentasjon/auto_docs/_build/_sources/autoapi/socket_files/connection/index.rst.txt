@@ -1,0 +1,59 @@
+:py:mod:`socket_files.connection`
+=================================
+
+.. py:module:: socket_files.connection
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   socket_files.connection.Connection
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   socket_files.connection.format
+
+
+.. py:data:: format
+   :annotation: = %(levelname)-20s : %(asctime)-10s : %(message)s
+
+   
+
+.. py:class:: Connection(game: object)
+
+   Object used to connecting to the server.
+
+   .. py:method:: get_id()
+
+
+   .. py:method:: refresh_vars()
+
+
+   .. py:method:: disconnect()
+
+      Disconnect form the server.
+
+
+   .. py:method:: conn(*args)
+
+      Connect to the server.
+
+
+   .. py:method:: startThreads()
+
+
+   .. py:method:: stopThreads()
+
+
+

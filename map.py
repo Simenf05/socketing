@@ -16,17 +16,22 @@ MAP = [[
     "ooooooooooo ooo",
     "           a   "], 
    [
-    "               ",
-    "               ",
-    "       a       ",
-    "               ",
-    "               ",
-    "               ",
-    "               ",
-    "               "
+    "ooooooooooooooo",
+    "o             o",
+    "o      a      o",
+    "o             o",
+    "o             o",
+    "o             o",
+    "o             o",
+    "ooooooooooooooo"
    ],
    [
-      "    a          ",
+      "ooooooooooooooo",
+      "o   a         o",
+      "o             o",
+      "o             o",
+      "o             o",
+      "ooooooooooooooo",
    ]
 ]
 

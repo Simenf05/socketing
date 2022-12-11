@@ -1,0 +1,36 @@
+:py:mod:`startscreen`
+=====================
+
+.. py:module:: startscreen
+
+.. autoapi-nested-parse::
+
+   DRAW = {
+       "text_overskrift" : (300, 100, "Hei og ha en god dag", "white"),
+       "input_name" : (200, 200, 200, 30, "Skriv navn her"),
+       "input_password" : (200, 300, 200, 30, "Skriv passord her"),
+       "input_color" : (200, 400, 200, 30, "Skriv farge her"),
+       "input_ip" : (200, 500, 200, 30, "192.168.0.138"),
+       "connbutton_done" : [200, 550, 100, 30, "screen", "map1", "ENTER"]
+   }
+
+
+
+Module Contents
+---------------
+
+.. py:data:: DRAW
+   
+
+   
+
+.. py:data:: LAYOUT_DIMENTIONS
+   :annotation: = [5, 1]
+
+   
+
+.. py:data:: SETTINGLAYOUT
+   
+
+   
+
