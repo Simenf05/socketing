@@ -4,7 +4,7 @@ import threading
 import pygame
 import pickle
 
-HOST = socket.gethostname()
+HOST = "192.168.0.155"
 PORT = 443
 
 s = socket.socket()
