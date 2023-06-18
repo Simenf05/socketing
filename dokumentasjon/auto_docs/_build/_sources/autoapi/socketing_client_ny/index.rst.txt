@@ -1,0 +1,98 @@
+:py:mod:`socketing_client_ny`
+=============================
+
+.. py:module:: socketing_client_ny
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   socketing_client_ny.Game
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   socketing_client_ny.format
+   socketing_client_ny.color
+   socketing_client_ny.HOST
+   socketing_client_ny.PORT
+   socketing_client_ny.s
+   socketing_client_ny.randomnr
+   socketing_client_ny.game
+
+
+.. py:data:: format
+   :annotation: = %(asctime)s: %(message)s
+
+   
+
+.. py:data:: color
+   
+
+   
+
+.. py:data:: HOST
+   :annotation: = 10.2.1.190
+
+   
+
+.. py:data:: PORT
+   :annotation: = 443
+
+   
+
+.. py:data:: s
+   
+
+   
+
+.. py:data:: randomnr
+   
+
+   
+
+.. py:class:: Game
+
+   .. py:method:: keydown(e)
+
+
+   .. py:method:: keyup(e)
+
+
+   .. py:method:: controls()
+
+
+   .. py:method:: recving()
+
+
+   .. py:method:: sendEnd()
+
+
+   .. py:method:: sendStart()
+
+
+   .. py:method:: sending()
+
+
+   .. py:method:: screenDraw(drawing: dict)
+
+
+   .. py:method:: running()
+
+
+
+.. py:data:: game
+   
+
+   
+

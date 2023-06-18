@@ -1,0 +1,28 @@
+:py:mod:`game.layout.blocks.action.actionWall`
+==============================================
+
+.. py:module:: game.layout.blocks.action.actionWall
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.blocks.action.actionWall.ActionWall
+
+
+
+
+.. py:class:: ActionWall(x: int, y: int, path: str)
+
+   Bases: :py:obj:`game.layout.blocks.blockFormat.BlockFormat`
+
+   Class to be subclassed to make different types of walls that interact with the player.
+
+   Inherits from BlockFormat.
+
+

@@ -1,0 +1,33 @@
+:py:mod:`game.layout.button.nextScreenBtn`
+==========================================
+
+.. py:module:: game.layout.button.nextScreenBtn
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.button.nextScreenBtn.NextScreen
+
+
+
+
+.. py:class:: NextScreen(x: int, y: int, w: int, h: int, screen, newScreen: str, text: None | str = None, activeButton: int = K_RETURN, color_: str | tuple = 'white', bgcolor_: str | tuple = 'black', fontSize: int = 32, width: int = 2)
+
+   Bases: :py:obj:`game.layout.button.buttonFormat.ButtonFormat`
+
+   Button that takes you to a different screen.
+
+   Inherits from ButtonFormat.
+
+   .. py:method:: action(**kwargs)
+
+      Takes you to the next screen.
+
+
+

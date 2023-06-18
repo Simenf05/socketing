@@ -1,0 +1,30 @@
+:py:mod:`socket_files.recving`
+==============================
+
+.. py:module:: socket_files.recving
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   socket_files.recving.Recv
+
+
+
+
+.. py:class:: Recv(s, running: bool, game: object)
+
+   Bases: :py:obj:`socket_files.stoppableThread.StoppableThread`
+
+   .. py:method:: addId(id: str)
+
+
+   .. py:method:: run()
+
+
+

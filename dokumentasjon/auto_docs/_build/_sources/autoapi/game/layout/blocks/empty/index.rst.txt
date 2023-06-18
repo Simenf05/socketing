@@ -1,0 +1,28 @@
+:py:mod:`game.layout.blocks.empty`
+==================================
+
+.. py:module:: game.layout.blocks.empty
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.blocks.empty.Empty
+
+
+
+
+.. py:class:: Empty(x: int, y: int, path: str)
+
+   Bases: :py:obj:`game.layout.blocks.blockFormat.BlockFormat`
+
+   Class for the empty blocks that have no collition.
+
+   Inherits from BlockFormat.
+
+

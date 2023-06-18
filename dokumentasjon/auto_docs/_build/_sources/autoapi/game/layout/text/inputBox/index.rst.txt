@@ -1,0 +1,98 @@
+:py:mod:`game.layout.text.inputBox`
+===================================
+
+.. py:module:: game.layout.text.inputBox
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.text.inputBox.InputBox
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.text.inputBox.keyboard
+
+
+.. py:data:: keyboard
+   
+
+   
+
+.. py:class:: InputBox(x: int, y: int, w: int, h: int, text: str = '', color_: str | tuple = 'white', bgcolor_: str | tuple = 'black', fontSize: int = 32, timeDiff: float = 0.2, backspaceTimeDiff: float = 0.1, width: int = 2)
+
+   Bases: :py:obj:`game.layout.componentFormat.ComponentFormat`
+
+   Inputbox to type in.
+
+   Inherits from ComponentFormat.
+
+   .. py:method:: get_drawinfo() -> tuple[pygame.Surface, list[int]]
+
+      Returns the information needed to blit the inputbox.
+
+      Returns:
+          tuple[pygame.Surface, list[int]]: First is the pygame surface and then the position. 
+
+
+   .. py:method:: visualRefresh() -> None
+
+      Updates all the visual elements of the inputbox.
+
+
+   .. py:method:: refresh()
+
+      Refreshes the font size and visuals.
+
+
+   .. py:method:: getText() -> str
+
+      Get the text present in the inputbox.
+
+      Returns:
+          str: The text in the box.
+
+
+   .. py:method:: changeText(newText: str) -> None
+
+      Changes the text in the inputbox.
+
+      Args:
+          newText (str): The new text.
+
+
+   .. py:method:: action(**kwargs) -> None
+
+      Action performed every frame to check if it was pressed.
+
+
+   .. py:method:: selected() -> None
+
+      Sets the inputbox to be selected.
+
+
+   .. py:method:: deselected() -> None
+
+      Sets the inputbox to be deselected.
+
+
+   .. py:method:: __str__() -> str
+
+      The string form of the object.
+
+      Returns:
+          str: Text of the inputbox.
+
+
+

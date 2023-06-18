@@ -1,0 +1,44 @@
+:py:mod:`game.layout.componentFormat`
+=====================================
+
+.. py:module:: game.layout.componentFormat
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.componentFormat.ComponentFormat
+
+
+
+
+.. py:class:: ComponentFormat(x: int, y: int)
+
+   Bases: :py:obj:`abc.ABC`
+
+   Class to be subclassed to create objects that can be shown on the Window().
+
+   Inherits from ABC.
+
+   .. py:method:: selected()
+
+
+   .. py:method:: deselected()
+
+
+   .. py:method:: refresh()
+
+
+   .. py:method:: get_drawinfo()
+      :abstractmethod:
+
+
+   .. py:method:: action(**kwargs)
+
+
+

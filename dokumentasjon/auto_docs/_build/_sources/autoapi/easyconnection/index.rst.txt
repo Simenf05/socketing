@@ -1,0 +1,24 @@
+:py:mod:`easyconnection`
+========================
+
+.. py:module:: easyconnection
+
+
+Module Contents
+---------------
+
+.. py:data:: host
+   
+
+   
+
+.. py:data:: data
+   
+
+   
+
+.. py:data:: data2
+   
+
+   
+

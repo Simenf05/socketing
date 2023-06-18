@@ -1,0 +1,29 @@
+:py:mod:`map`
+=============
+
+.. py:module:: map
+
+
+Module Contents
+---------------
+
+.. py:data:: TILESIZE
+   :annotation: = 40
+
+   
+
+.. py:data:: MAPSNAME
+   :annotation: = ['map1', 'map2', 'map3']
+
+   
+
+.. py:data:: ALINKS
+   :annotation: = ['map2', 'map3', 'map1', 'map1']
+
+   
+
+.. py:data:: MAP
+   :annotation: = [['ooooooooooooooo', 'o      o      o', 'o      o      o', 'o             a', 'o      o      o',...
+
+   
+

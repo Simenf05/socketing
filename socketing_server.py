@@ -2,8 +2,7 @@ import socket
 import threading
 import logging
 import time
-import pickle
-
+import json
 
 
 format = "%(asctime)s: %(message)s"
@@ -20,6 +19,7 @@ HOST = socket.gethostname()
 PORT = 443
 
 s = socket.socket()
+s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 
 
 def recvdata(sock, key):
@@ -27,12 +27,19 @@ def recvdata(sock, key):
     logging.info("motta starter")
 
     while running:
+        
+        recving = sock[0].recv(2048)
+        
         try:
-            getdata.update({key: pickle.loads(sock[0].recv(1024))})
+            recving = json.loads(recving.decode("utf-8"))
+        except json.JSONDecodeError:
+            continue    
+        getdata.update({key: recving})
 
-        except (ConnectionAbortedError, ConnectionResetError, pickle.UnpicklingError, EOFError):
+        if getdata[key]["info"] == "quit":
             sockets.pop(key)
             break
+        
     logging.info("motta slutter")
     
     getdata.pop(key)
@@ -40,11 +47,13 @@ def recvdata(sock, key):
     
 
 def senddata(socketAndData):
-    for key, sock in sockets.items():
+    for key, sock in sockets.copy().items():
         try:
-            sock[0].send(pickle.dumps(socketAndData[1]))
+            sock[0].send(json.dumps(socketAndData[1]).encode("utf-8"))
         except (ConnectionAbortedError, ConnectionResetError):
             sockets.pop(key)
+    
+    time.sleep(.0001)
 
 
 def game():
@@ -52,7 +61,7 @@ def game():
 
         data = getdata
 
-        for key, sock in sockets.items():
+        for key, sock in sockets.copy().items():
             try:
                 senddata((sock, data))
             except (ConnectionAbortedError, ConnectionResetError):
@@ -79,6 +88,7 @@ def conn():
 
         threadDict["thread " + str(nr + 2)].start()
         nr += 1
+        
 
     logging.info("kobling slutter")
 

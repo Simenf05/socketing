@@ -1,0 +1,58 @@
+:py:mod:`game.layout.blocks.blockFormat`
+========================================
+
+.. py:module:: game.layout.blocks.blockFormat
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.blocks.blockFormat.BlockFormat
+
+
+
+
+.. py:class:: BlockFormat(x: int, y: int, path: str)
+
+   Bases: :py:obj:`game.layout.componentFormat.ComponentFormat`
+
+   Class to be subclassed to make different types of blocks that can be shown on the Window().
+
+   Inherits from ComponentFormat. 
+
+   .. py:method:: get_collition() -> pygame.rect.Rect
+
+      Returns the collition of the block.
+
+
+   .. py:method:: set_path(path: str)
+
+
+   .. py:method:: setPos(x: int, y: int) -> None
+
+      Sets the position of the block.
+
+      Args:
+          x (int): New x position.
+          y (int): New y position.
+
+
+   .. py:method:: refresh() -> None
+
+      Refreshes the position of the block.
+
+
+   .. py:method:: get_drawinfo() -> tuple[pygame.Surface, list[int]]
+
+      Returns the information needed to draw the block.
+
+      Returns:
+          tuple[pygame.Surface, list[int]]: First is the image and then the position. 
+
+
+

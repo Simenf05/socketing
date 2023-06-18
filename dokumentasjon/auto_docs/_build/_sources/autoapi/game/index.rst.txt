@@ -1,0 +1,27 @@
+:py:mod:`game`
+==============
+
+.. py:module:: game
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   layout/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   map/index.rst
+   menu/index.rst
+   view/index.rst
+   window/index.rst
+
+

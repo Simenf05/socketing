@@ -1,0 +1,55 @@
+:py:mod:`server`
+================
+
+.. py:module:: server
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   server.Server
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   server.format
+   server.ip
+
+
+.. py:data:: format
+   :annotation: = %(asctime)s: %(message)s
+
+   
+
+.. py:class:: Server(HOST: str, PORT: int)
+
+   Main class for the server side scripts.
+
+   This should recive and send data to the clients while shutting down closed connections and accepting new connections.
+
+   .. py:method:: run() -> None
+
+      Starts the server.
+
+
+   .. py:method:: close() -> None
+
+      Closes the server and the socket object.
+
+
+
+.. py:data:: ip
+   
+
+   
+

@@ -1,0 +1,89 @@
+:py:mod:`socketing_server`
+==========================
+
+.. py:module:: socketing_server
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   socketing_server.recvdata
+   socketing_server.senddata
+   socketing_server.game
+   socketing_server.conn
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   socketing_server.format
+   socketing_server.sockets
+   socketing_server.threadDict
+   socketing_server.getdata
+   socketing_server.running
+   socketing_server.HOST
+   socketing_server.PORT
+   socketing_server.s
+
+
+.. py:data:: format
+   :annotation: = %(asctime)s: %(message)s
+
+   
+
+.. py:data:: sockets
+   
+
+   
+
+.. py:data:: threadDict
+   
+
+   
+
+.. py:data:: getdata
+   
+
+   
+
+.. py:data:: running
+   :annotation: = True
+
+   
+
+.. py:data:: HOST
+   
+
+   
+
+.. py:data:: PORT
+   :annotation: = 443
+
+   
+
+.. py:data:: s
+   
+
+   
+
+.. py:function:: recvdata(sock, key)
+
+
+.. py:function:: senddata(socketAndData)
+
+
+.. py:function:: game()
+
+
+.. py:function:: conn()
+
+

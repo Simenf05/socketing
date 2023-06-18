@@ -1,0 +1,80 @@
+:py:mod:`game.window`
+=====================
+
+.. py:module:: game.window
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.window.Window
+
+
+
+
+.. py:class:: Window(screensize: tuple, onScreen: str | None = None, screenName: str = 'screen', viewDict: dict = {})
+
+   Main class that makes and manages pygame window.
+
+   .. py:method:: addScreen(newScreen: tuple[str, object] | dict, changeScreen: bool = False) -> None
+
+      Adds a new object to the viewDict dictionary.
+
+      Args:
+          newScreen (tuple[str, object] | dict): If tuple then the first should be key and then the View() subclass. If dict then {key : value} pairs.
+          changeScreen (bool, optional): If the new screen should be set as onScreen. Defaults to False.
+
+
+   .. py:method:: setOnScreen(onScreen: str) -> None
+
+      Sets new key for the View() subclass on screen.
+
+      Args:
+          onScreen (str): The new key.
+
+
+   .. py:method:: popScreen(key: str) -> None
+
+      Removes a Veiw() subclass from veiwDict.
+
+      Args:
+          key (str): The key to remove.
+
+
+   .. py:method:: updateScreen() -> None
+
+      Updates the drawings on the screen.
+      Should be called every frame.
+
+
+   .. py:method:: keypressReg(keysPressed: Sequence[bool]) -> None
+
+      Does the action for the View() subclass on screen. 
+
+      Args:
+          keysPressed (Sequence[bool]): Should be the return of pygame.key.get_pressed().
+
+
+   .. py:method:: addPlayerToAllMaps(key: str, obj: object) -> None
+
+      Adds players to all the Map() objects.
+
+      Args:
+          key (str): The key of the player.
+          obj (object): The player object.
+
+
+   .. py:method:: __str__() -> str
+
+      Returns the string form of the object.
+
+      Returns:
+          str: Screen name, pygame screen object, on screen value, screenDict with all the View() subclasses.
+
+
+

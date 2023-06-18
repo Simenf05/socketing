@@ -1,0 +1,39 @@
+:py:mod:`consts`
+================
+
+.. py:module:: consts
+
+
+Module Contents
+---------------
+
+.. py:data:: BIGFONT
+   
+
+   
+
+.. py:data:: NORMALFONT
+   
+
+   
+
+.. py:data:: SMALLFONT
+   
+
+   
+
+.. py:data:: RED
+   :annotation: = [255, 0, 0]
+
+   
+
+.. py:data:: GREEN
+   :annotation: = [0, 255, 0]
+
+   
+
+.. py:data:: BLUE
+   :annotation: = [0, 0, 255]
+
+   
+

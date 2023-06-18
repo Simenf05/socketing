@@ -1,0 +1,60 @@
+:py:mod:`game.layout.button.buttonFormat`
+=========================================
+
+.. py:module:: game.layout.button.buttonFormat
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.button.buttonFormat.ButtonFormat
+
+
+
+
+.. py:class:: ButtonFormat(x: int, y: int, w: int, h: int, text: None | str = None, color_: str | tuple = 'white', bgcolor_: str | tuple = 'black', fontSize: int = 32, width: int = 2)
+
+   Bases: :py:obj:`game.layout.componentFormat.ComponentFormat`
+
+   Class to be subclassed to make different types buttons that can be clicked.
+
+   Inherits from ComponentFormat.
+
+   .. py:method:: get_drawinfo() -> tuple[pygame.Surface, list[int]]
+
+      Returns the information needed to draw the button.
+
+      Returns:
+          tuple[pygame.Surface, list[int]]: First is the pygame surface and then the position. 
+
+
+   .. py:method:: visualRefresh() -> None
+
+      Updates the visual aspect of the button.
+
+
+   .. py:method:: refresh() -> None
+
+      Refreshes the font size and visuals.
+
+
+   .. py:method:: action(**kwargs)
+      :abstractmethod:
+
+
+   .. py:method:: selected() -> None
+
+      Sets the button to be selected.
+
+
+   .. py:method:: deselected() -> None
+
+      Sets the button to be deselected.
+
+
+

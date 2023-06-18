@@ -1,0 +1,46 @@
+:py:mod:`game.menu`
+===================
+
+.. py:module:: game.menu
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.menu.Menu
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   game.menu.format
+
+
+.. py:data:: format
+   :annotation: = %(asctime)s: %(message)s
+
+   
+
+.. py:class:: Menu(drawing: dict, layout: object, timediff: float = 0.16)
+
+   Bases: :py:obj:`game.view.View`
+
+   General class for menus to be shown on Window().
+
+   Inherits from View.
+
+   .. py:method:: action(**kwargs) -> None
+
+      Moves the selected on the layout. Will be called every frame.
+
+
+

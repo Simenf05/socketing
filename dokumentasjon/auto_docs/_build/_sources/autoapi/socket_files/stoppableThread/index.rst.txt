@@ -1,0 +1,38 @@
+:py:mod:`socket_files.stoppableThread`
+======================================
+
+.. py:module:: socket_files.stoppableThread
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   socket_files.stoppableThread.StoppableThread
+
+
+
+
+.. py:class:: StoppableThread
+
+   Bases: :py:obj:`threading.Thread`
+
+   Derived class from the threading.Thread class
+
+   This class should be subclassed to create stoppable threads. 
+
+   .. py:method:: stop()
+
+      Stops the thread.
+
+
+   .. py:method:: stopped() -> bool
+
+      Checks if the thread is stopped.
+
+
+

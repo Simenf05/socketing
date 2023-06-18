@@ -1,0 +1,33 @@
+:py:mod:`game.layout.blocks.action.nextScreenBlck`
+==================================================
+
+.. py:module:: game.layout.blocks.action.nextScreenBlck
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.blocks.action.nextScreenBlck.NextScreenBlck
+
+
+
+
+.. py:class:: NextScreenBlck(x: int, y: int, path: str, screen, newScreen: str, newCoords: tuple)
+
+   Bases: :py:obj:`game.layout.blocks.action.actionWall.ActionWall`
+
+   Wall that will take you to the next screen.
+
+   Inherits from ActionWall
+
+   .. py:method:: action(**kwargs) -> None
+
+      The action performed when the player contacts the block.
+
+
+

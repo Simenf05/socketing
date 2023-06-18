@@ -1,0 +1,33 @@
+:py:mod:`game.layout.button.nextScreenAndConnBtn`
+=================================================
+
+.. py:module:: game.layout.button.nextScreenAndConnBtn
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.layout.button.nextScreenAndConnBtn.NextScreenAndConnBtn
+
+
+
+
+.. py:class:: NextScreenAndConnBtn(x: int, y: int, w: int, h: int, game, newScreen: str, text: None | str = None, activeButton: int = K_RETURN, color_: str | tuple = 'white', bgcolor_: str | tuple = 'black', fontSize: int = 32, width: int = 2)
+
+   Bases: :py:obj:`game.layout.button.buttonFormat.ButtonFormat`
+
+   Button that takes you to a different screen and starts connection.
+
+   Inherits from ButtonFormat.
+
+   .. py:method:: action(**kwargs)
+
+      Takes you to the next screen.
+
+
+

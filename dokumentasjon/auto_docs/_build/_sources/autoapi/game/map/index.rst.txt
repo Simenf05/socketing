@@ -1,0 +1,62 @@
+:py:mod:`game.map`
+==================
+
+.. py:module:: game.map
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   game.map.Map
+
+
+
+
+.. py:class:: Map(player: object, drawing: dict, layout: object, collition: list, actionList: list, mapName: str, onlinePlayer: dict = {}, timediff: float = 0.16)
+
+   Bases: :py:obj:`game.view.View`
+
+   General class for maps to be shown on Window().
+
+   Inherits from View.
+
+   .. py:method:: addOPlayer(key: str, obj: object) -> None
+
+      Adds online player.
+
+      NOTE: Work in progress.
+
+      Args:
+          key (str): Key for the online player.
+          obj (object): Object of the player block.
+
+
+   .. py:method:: removePlayer(key: str) -> None
+
+      Removes online player.
+
+      NOTE: Work in progress.
+
+      Args:
+          key (str): Key of the player.
+
+
+   .. py:method:: drawAll(screen_: object) -> None
+
+      Draws all the components in the drawing dictionary.
+
+      Args:
+          screen_ (object): Main Window() object.
+
+
+   .. py:method:: action(**kwargs) -> None
+
+      Does the action and controls the player. Will be called every frame.
+
+
+
