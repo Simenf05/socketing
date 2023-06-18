@@ -2,21 +2,12 @@ import socket
 import random
 import threading
 import pygame
-import json
-import time
-import logging
+import pickle
 
-format = "%(asctime)s: %(message)s"
-logging.basicConfig(format=format, level=logging.DEBUG, datefmt="%H:%M:%S")
-
-
-color = input("color: ")
-
-HOST = socket.gethostname()
+HOST = "192.168.0.155"
 PORT = 443
 
 s = socket.socket()
-s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 
 randomnr = random.randint(0, 500)
 
@@ -63,56 +54,21 @@ class Game:
 
         while not self.crashed:
             try:
-                self.data = s.recv(2048)
-            
-                self.usedData = json.loads(self.data.decode("utf-8"))
-            except json.JSONDecodeError:
+                self.data = pickle.loads(s.recv(1024))
+            except pickle.UnpicklingError:
                 continue
-            except (ConnectionAbortedError, ConnectionResetError):
-                return
-
-    
-    
-    def sendEnd(self):
-        s.send(
-            json.dumps({
-                        "info": "quit",
-                        "sock": self.sock,
-                        "box": None,
-                        "color": None
-                        }).encode("utf-8")
-        )
-        time.sleep(.005)
-    
-    
-    def sendStart(self):
-        s.send(
-            json.dumps({
-                        "info": "start",
-                        "sock": self.sock,
-                        "box": (self.box.x, self.box.y, self.box.w, self.box.h),
-                        "color": color
-                        }).encode("utf-8")
-        )
-        time.sleep(.005)
 
 
     def sending(self):
-        self.sendStart()
-        
+
         while not self.crashed:
             s.send(
-                    json.dumps({
-                        "info": "none",
-                        "sock": self.sock,
-                        "box": (self.box.x, self.box.y, self.box.w, self.box.h),
-                        "color": color
-                        }).encode("utf-8")
+                    pickle.dumps({
+                        "box": self.box,
+                        "color": "blue"
+                        })
                 )
-            time.sleep(.005)
-        
-        
-        
+
 
     def screenDraw(self, drawing: dict):
         pygame.draw.rect(self.screen, drawing["color"], drawing["box"])
@@ -120,34 +76,19 @@ class Game:
 
     def running(self):
 
-        self.controlThread.start()
-        self.recvThread.start()
-        self.sendThread.start()
+        controlThread = threading.Thread(target=self.controls)
+        recvThread = threading.Thread(target=self.recving)
+        sendThread = threading.Thread(target=self.sending)
+
+        controlThread.start()
+        recvThread.start()
+        sendThread.start()
 
         while not self.crashed:
             self.events = pygame.event.get()
-            
             for e in self.events:
                 if e.type == pygame.QUIT:
-                    logging.debug("Recieved pygame.QUIT event")
-                    
-                    self.sendEnd()
-                    
-                    logging.debug("Siste data sendt")
-                    
-                    pygame.display.quit()
-                    
-                    logging.debug("Pygame display quit")
-                    
-                    pygame.quit()
-                    
-                    logging.debug("Pygame quit")
-                    
                     self.crashed = True
-                    
-                    logging.debug("self.crashed flipped")
-                    
-                    return
 
             if self.activeMove["w"]:
                 self.box.move_ip(0, -5)
@@ -159,20 +100,19 @@ class Game:
                 self.box.move_ip(5, 0)
             
 
-            self.screen.fill("black")
+            pygame.Surface.fill(self.screen, "black")
 
-            if self.usedData:
-                for key, d in self.usedData.items():
+            if self.data:
+                for key, d in self.data.items():
                     if key == self.sock:
                         continue
                     else:
                         self.screenDraw(d)
 
-            pygame.draw.rect(self.screen, color, self.box)
+            pygame.draw.rect(self.screen, "blue", self.box)
 
             pygame.display.update()
             self.clock.tick(30)
-        
 
 
     def __init__(self):
@@ -189,18 +129,10 @@ class Game:
                 "x": randomnr,
                 "y": randomnr
             }
-            
-            self.controlThread = threading.Thread(target=self.controls)
-            self.recvThread = threading.Thread(target=self.recving)
-            self.sendThread = threading.Thread(target=self.sending)
-            
-            
+
             self.box = pygame.Rect(self.pos["x"], self.pos["y"], 20, 20)
 
             self.data = {}
-            
-            self.usedData = {}
-            
             self.crashed = False
 
             self.events = pygame.event.get()
@@ -210,15 +142,7 @@ class Game:
             s.connect((HOST, PORT))
 
             self.sock = s.recv(1024).decode("ascii")
-            
-            
+            self.running()
             
 
 game = Game()
-game.running()
-
-time.sleep(1)
-
-logging.debug("Closing socket and quiting")
-
-s.close()
