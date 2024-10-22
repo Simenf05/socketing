@@ -155,7 +155,7 @@ class Game:
         
         for key, item in self.onlineData.copy().items():
             
-            if key.split("_")[1] == self.connection.get_id():
+            if key.split("_")[1] == self.connection.get_id().split("_")[1]:
                 
                 continue
             

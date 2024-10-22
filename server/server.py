@@ -36,7 +36,7 @@ class Server:
         
         self.running = True
         
-        self.db = database.Database("localhost", "root", "simenerkul", "game_info")
+        self.db = database.Database("localhost", "root", "Password you want to use", "game_info")
         
         self.listening = listen.Listen(self.running ,self.s, self.sockets, self.threads, self.HOST, self.PORT, self.getData, self.db, self.socketsSend)
         self.sending = sending.Send(self.running, self.socketsSend, self.getData)
