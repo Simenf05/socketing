@@ -16,7 +16,7 @@ getdata = {}
 running = True
 
 HOST = socket.gethostname()
-PORT = 443
+PORT = 8069
 
 s = socket.socket()
 s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
